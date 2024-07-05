@@ -883,6 +883,12 @@ body {
   padding: 0 .2em;
   color: #030303;
 }
+.login-box img.login-image {
+  max-width: 100%;
+  height: auto;
+  margin-bottom: 20px; 
+  border-radius: 10px;
+}
 
 /* Submit button */
 .login-box input[type="submit"] {
