@@ -18,9 +18,7 @@
         <div class="row">
           <div class="col-md-12">
             <nav class="navbar navbar-expand-lg navbar-light">
-              <a class="navbar-brand" href="index.html"
-                >Lorong Belakang Cyberjaya
-              </a>
+              <a class="navbar-brand" href="index.html">Lorong Belakang</a>
               <div class="navbar-collapse justify-content-end">
                 <ul class="navbar-nav">
                   <li class="nav-item">
@@ -53,29 +51,21 @@
             <div class="company-checkbox_wrap mt-4">
               <div class="company-checkbox form">
                 <form
-                  id="registrationForm"
                   aria-label="Vendor Registration Form"
                   enctype="multipart/form-data"
+                  id="registrationForm"
                   method="POST"
                   onsubmit="submitForm()"
                 >
                   <div class="form-section page active" id="page1">
-                    <label for="participatingSession"
-                      >Participating Session:</label
-                    >
-                    <select
+                    <label for="vendorName">Vendor's Name:</label>
+                    <input
                       class="input-field"
-                      id="participatingSession"
-                      name="participatingSession"
+                      id="vendorName"
+                      name="vendorName"
                       required
-                    >
-                      <option value="">Select Session</option>
-                      <option value="1">July Week 1</option>
-                      <option value="2">July Week 2</option>
-                      <option value="3">July Week 3</option>
-                      <option value="4">July Week 4</option>
-                      <option value="5">July Week 5</option>
-                    </select>
+                      type="text"
+                    />
 
                     <div class="button-section">
                       <br />
@@ -86,11 +76,11 @@
                   </div>
 
                   <div class="form-section page" id="page2">
-                    <label for="vendorName">Vendor's Name:</label>
+                    <label for="businessName">Business's Name:</label>
                     <input
                       class="input-field"
-                      id="vendorName"
-                      name="vendorName"
+                      id="businessName"
+                      name="businessName"
                       required
                       type="text"
                     />
@@ -107,13 +97,13 @@
                   </div>
 
                   <div class="form-section page" id="page3">
-                    <label for="businessName">Business's Name:</label>
+                    <label for="email">Email:</label>
                     <input
                       class="input-field"
-                      id="businessName"
-                      name="businessName"
+                      id="email"
+                      name="email"
                       required
-                      type="text"
+                      type="email"
                     />
 
                     <div class="button-section">
@@ -128,13 +118,15 @@
                   </div>
 
                   <div class="form-section page" id="page4">
-                    <label for="email">Email:</label>
+                    <label for="whatsapp">WhatsApp Number:</label>
                     <input
                       class="input-field"
-                      id="email"
-                      name="email"
+                      id="whatsapp"
+                      name="whatsapp"
+                      pattern="[0-9]{10,15}"
+                      placeholder="E.g., 1234567890"
                       required
-                      type="email"
+                      type="tel"
                     />
 
                     <div class="button-section">
@@ -149,16 +141,16 @@
                   </div>
 
                   <div class="form-section page" id="page5">
-                    <label for="whatsapp">WhatsApp Number:</label>
-                    <input
-                      class="input-field"
-                      id="whatsapp"
-                      name="whatsapp"
-                      pattern="[0-9]{10,15}"
-                      placeholder="E.g., 1234567890"
+                    <label for="socialMedia"
+                      >Social Media (Instagram / Facebook):</label
+                    >
+                    <textarea
+                      class="input-field-big"
+                      id="socialMedia"
+                      name="socialMedia"
                       required
-                      type="tel"
-                    />
+                      rows="2"
+                    ></textarea>
 
                     <div class="button-section">
                       <br />
@@ -336,7 +328,7 @@
                       <button class="btn btn-danger" onclick="prevPage(13)">
                         Previous
                       </button>
-                      <button type="submit" class="btn btn-danger">
+                      <button class="btn btn-danger" type="submit">
                         Submit
                       </button>
                     </div>
@@ -364,18 +356,10 @@
 
               <ul>
                 <li>
-                  <a
-                    href="https://www.facebook.com/lorongbelakangcyberjaya/?locale=ms_MY"
-                    target="_blank"
-                    ><span class="ti-facebook"></span
-                  ></a>
+                  <a href="#"><span class="ti-facebook"></span></a>
                 </li>
                 <li>
-                  <a
-                    href="https://www.instagram.com/lorongbelakangcyberjaya/"
-                    target="_blank"
-                    ><span class="ti-instagram"></span
-                  ></a>
+                  <a href="#"><span class="ti-instagram"></span></a>
                 </li>
               </ul>
             </div>
@@ -411,12 +395,11 @@
     const reviewInfoDiv = document.getElementById("review-info");
 
     // Gather information from form inputs
-    const month = new Date().toLocaleString("default", { month: "long" });
-    const session = document.getElementById("participatingSession").value;
     const vendorName = document.getElementById("vendorName").value;
     const businessName = document.getElementById("businessName").value;
     const email = document.getElementById("email").value;
     const whatsapp = document.getElementById("whatsapp").value;
+    const socialMedia = document.getElementById("socialMedia").value;
     const category = document.getElementById("productCategory").value;
     const productType = document.getElementById("productType").value;
     const equipmentList = document.getElementById("equipmentList").value;
@@ -442,11 +425,12 @@
 
     // Populate review page
     reviewInfoDiv.innerHTML = `
-        <p><strong>Participating Session:</strong> ${month} Week ${session}</p>
         <p><strong>Vendor's Name:</strong> ${vendorName}</p>
         <p><strong>Business's Name:</strong> ${businessName}</p>
         <p><strong>Email:</strong> ${email}</p>
         <p><strong>WhatsApp Number:</strong> ${whatsapp}</p>
+        <p><strong>Social Media:</strong></p>
+        <pre>${socialMedia}</pre>
         <p><strong>Product Category:</strong> ${category}</p>
         <p><strong>Product Type:</strong> ${productType}</p>
         <p><strong>Equipment List:</strong></p>
