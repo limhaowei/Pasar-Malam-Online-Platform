@@ -263,6 +263,7 @@ p {
   position: relative;
   border: #909090 solid 1px;
   border-radius: 15px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .vendor-wrap:hover {
@@ -708,7 +709,7 @@ footer {
   padding: 0 0 0 34px;
 }
 
-#blog p {
+#user-guide p {
   line-height: 1.75;
 }
 
@@ -818,11 +819,11 @@ form {
 }
 
 /* Body styles */
-body {
+.login {
   background-color: #f0f0f0;
   display: flex;
   justify-content: center;
-  align-items: center; 
+  align-items: center;
   height: 100vh;
   margin: 0;
 }
@@ -830,9 +831,9 @@ body {
 /* Login box */
 .login-box {
   display: flex;
-  flex-direction: column; 
+  flex-direction: column;
   justify-content: center;
-  align-items: center; 
+  align-items: center;
   background-color: #fff;
   padding: 50px;
   border-radius: 8px;
@@ -848,10 +849,9 @@ body {
 }
 
 /* Input fields */
-.input-group{
+.input-group {
   position: relative;
-  margin-bottom: 20px; 
-  
+  margin-bottom: 20px;
 }
 
 .input {
@@ -862,31 +862,33 @@ body {
   font-size: 18px;
 }
 
-.label{
+.label {
   position: absolute;
   left: 15px;
   color: #030303;
   pointer-events: none;
   transform: translateY(15px);
   font-size: 16px;
-  transition: 150ms cubic-bezier(0.4,0, 0.2, 1);
+  transition: 150ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.input:focus, input:valid{
+.input:focus,
+input:valid {
   outline: none;
   border: 1.8px solid #030303;
 }
 
-.input:focus ~ label, .input:valid ~ label{
+.input:focus ~ label,
+.input:valid ~ label {
   transform: translateX(-10%) translateY(-50%) scale(0.9);
   background-color: #fff;
-  padding: 0 .2em;
+  padding: 0 0.2em;
   color: #030303;
 }
 .login-box img.login-image {
   max-width: 100%;
   height: auto;
-  margin-bottom: 20px; 
+  margin-bottom: 20px;
   border-radius: 10px;
 }
 
@@ -894,7 +896,7 @@ body {
 .login-box input[type="submit"] {
   width: 100%;
   padding: 10px;
-  background-color: #4CAF50;
+  background-color: #4caf50;
   color: white;
   border: none;
   border-radius: 4px;
@@ -936,4 +938,59 @@ body {
 
 .login-box .login-type button:hover {
   opacity: 0.8;
+}
+
+/* Vendor of the Week */
+#vendor-of-the-week .styled-heading {
+  text-align: center;
+  margin: 0 0 50px;
+}
+
+@media (max-width: 768px) {
+  #vendor-of-the-week .styled-heading {
+    margin: 0 0 30px;
+  }
+}
+
+#vendor-of-the-week h3 {
+  color: #f0f0f0;
+  position: relative;
+  padding: 0 0 23px;
+}
+
+#vendor-of-the-week .styled-heading h3:after {
+  position: absolute;
+  content: "";
+  width: 60px;
+  height: 3px;
+  background: #f0f0f0;
+  bottom: 0;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  transform: translateX(-50%);
+}
+
+.vendor-image {
+  padding-right: 20px;
+}
+
+#vendor-of-the-week .vendor-wrap {
+  padding: 20px;
+}
+
+#vendor-of-the-week .vendor-wrap img {
+  width: 100%;
+  border-radius: 0;
+}
+
+#vendor-of-the-week a {
+  text-decoration: underline;
+}
+
+.vendor-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-left: 20px;
 }
