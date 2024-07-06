@@ -6,4 +6,6 @@ class Vendor(models.Model):
     social_media_alias = models.CharField(max_length=255)
     owner = models.ForeignKey('auth.User', on_delete=models.CASCADE)
 
+    
+    
 

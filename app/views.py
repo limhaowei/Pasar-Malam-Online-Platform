@@ -1,19 +1,26 @@
 
 from django.shortcuts import render, redirect
-from django.contrib.auth.decorators import login_required
-from .models import Vendor, Registration, Review
-from .forms import RegistrationForm, ReviewForm
 
-@login_required
-def registration_view(request):
+from .models import Vendor
+from .forms import VendorForm
+
+
+def register_vendor(request):
     if request.method == 'POST':
-        form = RegistrationForm(request.POST, request.FILES)
+        form = VendorForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-            return redirect('vendor_profile')
+            return redirect('vendor_list')
     else:
-        form = RegistrationForm()
-    return render(request, 'registration.html', {'form': form})
+        form = VendorForm()
+    return render(request, 'register_vendor.html', {'form': form})
+
+
+def vendor_list(request):
+    vendors = Vendor.objects.all()
+    return render(request, 'vendor_list.html', {'vendors': vendors})
+
+
 
 
 
