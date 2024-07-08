@@ -436,10 +436,10 @@
   function nextPage(event, current) {
     event.preventDefault();
 
-    // if (!validatePage(current)) {
-    //   alert("Please fill out all required fields.");
-    //   return;
-    // }
+    if (!validatePage(current)) {
+      alert("Please fill out all required fields.");
+      return;
+    }
 
     if (current === 10) {
       displayReviewInfo();
