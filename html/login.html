@@ -1,36 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/simple-line-icons.css" rel="stylesheet">
-    <link href="css/themify-icons.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
+    <link href="css/simple-line-icons.css" rel="stylesheet" />
+    <link href="css/themify-icons.css" rel="stylesheet" />
+    <link href="css/style.css" rel="stylesheet" />
     <title>Login Form</title>
-
-</head>
-<body class="login">
+  </head>
+  <body class="login">
     <div class="login-box">
-        <img src="images/logo.jpg" alt="Login Image" class="login-image">
-        <h2>LOGIN</h2>
-        <form action="/login" method="post">
-            <div class="input-group">
-                <input type="text" id="email" name="email" class = "input" required>
-                <label class = "label">Email</label>
-            </div>
-            <div class="input-group">
-        
-                <input type="password" id="password" name="password" class = "input" required>
-                <label class = "label">Password</label>
-            </div>
-            <div class="login-type">
-                <button type="submit" name="login-type" value="normal">User Login</button>
-                <button type="submit" name="login-type" value="vendor">Vendor Login</button>
-            </div>
-        </form>
+      <img src="images/logo.jpg" alt="Login Image" class="login-image" />
+      <h2>LOGIN</h2>
+      <form action="/login" method="post">
+        <div class="input-group">
+          <input type="text" id="email" name="email" class="input" required />
+          <label class="label">Email</label>
+        </div>
+        <div class="input-group">
+          <input
+            type="password"
+            id="password"
+            name="password"
+            class="input"
+            required
+          />
+          <label class="label">Password</label>
+        </div>
+        <div class="login-type">
+          <button type="submit" name="login-type" value="normal">
+            User Login
+          </button>
+          <button type="submit" name="login-type" value="vendor">
+            Vendor Login
+          </button>
+        </div>
+      </form>
     </div>
-</body>
+  </body>
 </html>

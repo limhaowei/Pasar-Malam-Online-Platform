@@ -248,9 +248,6 @@ p {
   background: #212124;
   bottom: 0;
   left: 50%;
-  -webkit-transform: translateX(-50%);
-  -ms-transform: translateX(-50%);
-  transform: translateX(-50%);
 }
 
 /* vendors */
@@ -267,7 +264,6 @@ p {
 }
 
 .vendor-wrap:hover {
-  -webkit-transform: translateY(-2px);
   -ms-transform: translateY(-2px);
   transform: translateY(-2px);
   -webkit-box-shadow: 0px 3px 40px 0 rgba(206, 205, 205, 0.3);
@@ -715,13 +711,40 @@ footer {
 
 /* registration form */
 form {
-  max-width: 90%;
   margin: auto;
 }
 
+.register-wrap {
+  background: #fff;
+  position: relative;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+}
+
+.register {
+  color: #212124;
+  font-size: 15px;
+}
+
+.form-section h5 {
+  text-align: center;
+  font-weight: 600;
+  font-size: 20px;
+}
+
 .form-section {
-  margin-bottom: 15px;
   font-size: 18px;
+  text-align: left;
+  color: #212124;
+  margin: 15px 50px;
+}
+
+.form-section p {
+  font-size: 18px;
+  text-align: left;
+  color: #212124;
 }
 
 .input-field {
@@ -786,7 +809,7 @@ form {
   padding: 10px 20px;
   border-radius: 10px;
   cursor: pointer;
-  margin-right: 50px;
+  margin: 0 25px;
 }
 
 .form-section button:hover,
@@ -800,7 +823,6 @@ form {
 }
 
 .button-section {
-  max-width: 50%;
   margin: auto;
   text-align: center;
 }
@@ -966,9 +988,6 @@ input:valid {
   background: #f0f0f0;
   bottom: 0;
   left: 50%;
-  -webkit-transform: translateX(-50%);
-  -ms-transform: translateX(-50%);
-  transform: translateX(-50%);
 }
 
 .vendor-image {

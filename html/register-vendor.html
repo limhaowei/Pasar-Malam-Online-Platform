@@ -9,7 +9,7 @@
     <link href="css/themify-icons.css" rel="stylesheet" />
     <link href="css/style.css" rel="stylesheet" />
 
-    <title>Register</title>
+    <title>Register As A Vendor</title>
   </head>
 
   <body>
@@ -27,10 +27,15 @@
                   <li class="nav-item">
                     <a class="nav-link" href="user-guide.html">User Guide</a>
                   </li>
+                  <li class="nav-item">
+                    <a class="btn btn-outline-light top-btn" href="login.html"
+                      >Sign In</a
+                    >
+                  </li>
                   <li>
                     <a
                       class="btn btn-outline-light top-btn"
-                      href="register.html"
+                      href="register-vendor.html"
                       ><span class="ti-plus"></span> Register</a
                     >
                   </li>
@@ -46,19 +51,19 @@
       <div class="container">
         <div class="row justify-content-center">
           <div class="col-md-9 responsive-wrap">
-            <div class="company-checkbox_wrap">
-              <div class="company-checkbox">
-                <h5>Register</h5>
+            <div class="register-wrap">
+              <div class="register">
+                <h5>Register as a Vendor</h5>
               </div>
             </div>
-            <div class="company-checkbox_wrap mt-4">
-              <div class="company-checkbox form">
+            <div class="register-wrap mt-4">
+              <div class="register form">
                 <form
                   aria-label="Vendor Registration Form"
                   enctype="multipart/form-data"
                   id="registrationForm"
                   method="POST"
-                  onsubmit="submitForm()"
+                  onsubmit="submitForm(event)"
                 >
                   <div class="form-section page active" id="page1">
                     <label for="vendorName">Vendor's Name:</label>
@@ -72,34 +77,16 @@
 
                     <div class="button-section">
                       <br />
-                      <button class="btn btn-danger" onclick="nextPage(1)">
+                      <button
+                        class="btn btn-danger"
+                        onclick="nextPage(event, 1)"
+                      >
                         Next
                       </button>
                     </div>
                   </div>
 
                   <div class="form-section page" id="page2">
-                    <label for="businessName">Business's Name:</label>
-                    <input
-                      class="input-field"
-                      id="businessName"
-                      name="businessName"
-                      required
-                      type="text"
-                    />
-
-                    <div class="button-section">
-                      <br />
-                      <button class="btn btn-danger" onclick="prevPage(2)">
-                        Previous
-                      </button>
-                      <button class="btn btn-danger" onclick="nextPage(2)">
-                        Next
-                      </button>
-                    </div>
-                  </div>
-
-                  <div class="form-section page" id="page3">
                     <label for="email">Email:</label>
                     <input
                       class="input-field"
@@ -111,33 +98,73 @@
 
                     <div class="button-section">
                       <br />
-                      <button class="btn btn-danger" onclick="prevPage(3)">
+                      <button
+                        class="btn btn-danger"
+                        onclick="prevPage(event, 2)"
+                      >
                         Previous
                       </button>
-                      <button class="btn btn-danger" onclick="nextPage(3)">
+                      <button
+                        class="btn btn-danger"
+                        onclick="nextPage(event, 2)"
+                      >
+                        Next
+                      </button>
+                    </div>
+                  </div>
+
+                  <div class="form-section page" id="page3">
+                    <label for="phoneNumber">Phone Number:</label>
+                    <input
+                      class="input-field"
+                      id="phoneNumber"
+                      name="phoneNumber"
+                      pattern="[0-9]{10,15}"
+                      placeholder="E.g., 1234567890"
+                      required
+                      type="tel"
+                    />
+                    <div class="button-section">
+                      <br />
+                      <button
+                        class="btn btn-danger"
+                        onclick="prevPage(event, 3)"
+                      >
+                        Previous
+                      </button>
+                      <button
+                        class="btn btn-danger"
+                        onclick="nextPage(event, 3)"
+                      >
                         Next
                       </button>
                     </div>
                   </div>
 
                   <div class="form-section page" id="page4">
-                    <label for="whatsapp">WhatsApp Number:</label>
+                    <label for="SSM"
+                      >SSM Number (Company Registration Number)</label
+                    >
                     <input
                       class="input-field"
-                      id="whatsapp"
-                      name="whatsapp"
-                      pattern="[0-9]{10,15}"
-                      placeholder="E.g., 1234567890"
+                      id="SSM"
+                      name="SSM"
                       required
-                      type="tel"
+                      type="text"
                     />
 
                     <div class="button-section">
                       <br />
-                      <button class="btn btn-danger" onclick="prevPage(4)">
+                      <button
+                        class="btn btn-danger"
+                        onclick="prevPage(event, 4)"
+                      >
                         Previous
                       </button>
-                      <button class="btn btn-danger" onclick="nextPage(4)">
+                      <button
+                        class="btn btn-danger"
+                        onclick="nextPage(event, 4)"
+                      >
                         Next
                       </button>
                     </div>
@@ -145,7 +172,7 @@
 
                   <div class="form-section page" id="page5">
                     <label for="socialMedia"
-                      >Social Media (Instagram / Facebook):</label
+                      >Link to Social Media (Instagram / Facebook):</label
                     >
                     <textarea
                       class="input-field-big"
@@ -157,41 +184,110 @@
 
                     <div class="button-section">
                       <br />
-                      <button class="btn btn-danger" onclick="prevPage(5)">
+                      <button
+                        class="btn btn-danger"
+                        onclick="prevPage(event, 5)"
+                      >
                         Previous
                       </button>
-                      <button class="btn btn-danger" onclick="nextPage(5)">
+                      <button
+                        class="btn btn-danger"
+                        onclick="nextPage(event, 5)"
+                      >
                         Next
                       </button>
                     </div>
                   </div>
 
                   <div class="form-section page" id="page6">
-                    <label for="productCategory">Product Category:</label>
-                    <select
+                    <label for="productName">Product Name:</label>
+                    <input
                       class="input-field"
-                      id="productCategory"
-                      name="productCategory"
+                      id="productName"
+                      name="productName"
                       required
-                    >
-                      <option value="">Select Category</option>
-                      <option value="F&B">F&B</option>
-                      <option value="Non-F&B">Non-F&B</option>
-                    </select>
+                      type="text"
+                    />
 
                     <div class="button-section">
                       <br />
-                      <button class="btn btn-danger" onclick="prevPage(6)">
+                      <button
+                        class="btn btn-danger"
+                        onclick="prevPage(event, 6)"
+                      >
                         Previous
                       </button>
-                      <button class="btn btn-danger" onclick="nextPage(6)">
+                      <button
+                        class="btn btn-danger"
+                        onclick="nextPage(event, 6)"
+                      >
                         Next
                       </button>
                     </div>
                   </div>
 
                   <div class="form-section page" id="page7">
-                    <label for="productPicture">Product Picture (max 3):</label>
+                    <label for="productType">Product Type:</label>
+                    <select
+                      class="input-field"
+                      id="productType"
+                      name="productType"
+                      required
+                    >
+                      <option value="">Select Type</option>
+                      <option value="F&B">F&B</option>
+                      <option value="Non-F&B">Non-F&B</option>
+                    </select>
+
+                    <div class="button-section">
+                      <br />
+                      <button
+                        class="btn btn-danger"
+                        onclick="prevPage(event, 7)"
+                      >
+                        Previous
+                      </button>
+                      <button
+                        class="btn btn-danger"
+                        onclick="nextPage(event, 7)"
+                      >
+                        Next
+                      </button>
+                    </div>
+                  </div>
+
+                  <div class="form-section page" id="page8">
+                    <label for="typhoidCertificate"
+                      >Upload Typhoid Certificate (F&B Only):</label
+                    >
+                    <div class="input-field">
+                      <input
+                        accept=".pdf,.doc,.docx,.jpg,.png"
+                        id="typhoidCertificate"
+                        name="typhoidCertificate"
+                        type="file"
+                      />
+                    </div>
+
+                    <div class="button-section">
+                      <br />
+                      <button
+                        class="btn btn-danger"
+                        onclick="prevPage(event, 8)"
+                      >
+                        Previous
+                      </button>
+                      <button
+                        class="btn btn-danger"
+                        onclick="nextPage(event, 8)"
+                      >
+                        Next
+                      </button>
+                    </div>
+                  </div>
+
+                  <div class="form-section page" id="page9">
+                    <label for="productPicture">Product Picture:</label>
                     <div class="input-field">
                       <input
                         accept="image/*"
@@ -205,68 +301,28 @@
 
                     <div class="button-section">
                       <br />
-                      <button class="btn btn-danger" onclick="prevPage(7)">
+                      <button
+                        class="btn btn-danger"
+                        onclick="prevPage(event, 9)"
+                      >
                         Previous
                       </button>
-                      <button class="btn btn-danger" onclick="nextPage(7)">
-                        Next
-                      </button>
-                    </div>
-                  </div>
-
-                  <div class="form-section page" id="page8">
-                    <label for="productType">Product Type:</label>
-                    <input
-                      class="input-field"
-                      id="productType"
-                      name="productType"
-                      required
-                      type="text"
-                    />
-
-                    <div class="button-section">
-                      <br />
-                      <button class="btn btn-danger" onclick="prevPage(8)">
-                        Previous
-                      </button>
-                      <button class="btn btn-danger" onclick="nextPage(8)">
-                        Next
-                      </button>
-                    </div>
-                  </div>
-
-                  <div class="form-section page" id="page9">
-                    <label for="certificateUpload">Upload Certificate:</label>
-                    <div class="input-field">
-                      <input
-                        accept=".pdf,.doc,.docx,.jpg,.png"
-                        id="certificateUpload"
-                        multiple
-                        name="certificateUpload[]"
-                        type="file"
-                      />
-                    </div>
-
-                    <div class="button-section">
-                      <br />
-                      <button class="btn btn-danger" onclick="prevPage(9)">
-                        Previous
-                      </button>
-                      <button class="btn btn-danger" onclick="nextPage(9)">
+                      <button
+                        class="btn btn-danger"
+                        onclick="nextPage(event, 9)"
+                      >
                         Next
                       </button>
                     </div>
                   </div>
 
                   <div class="form-section page" id="page10">
-                    <label for="registrationCertificate"
-                      >Company Registration Certificate:</label
-                    >
+                    <label for="productMenu">Product Menu:</label>
                     <div class="input-field">
                       <input
                         accept=".pdf,.jpg,.png"
-                        id="registrationCertificate"
-                        name="registrationCertificate"
+                        id="productMenu"
+                        name="productMenu"
                         required
                         type="file"
                       />
@@ -274,61 +330,53 @@
 
                     <div class="button-section">
                       <br />
-                      <button class="btn btn-danger" onclick="prevPage(10)">
+                      <button
+                        class="btn btn-danger"
+                        onclick="prevPage(event, 10)"
+                      >
                         Previous
                       </button>
-                      <button class="btn btn-danger" onclick="nextPage(10)">
+                      <button
+                        class="btn btn-danger"
+                        onclick="nextPage(event, 10)"
+                      >
                         Next
                       </button>
                     </div>
                   </div>
 
                   <div class="form-section page" id="page11">
-                    <label for="equipmentList"
-                      >List of Equipment Used in Business:</label
-                    >
-                    <textarea
-                      class="input-field-big"
-                      id="equipmentList"
-                      name="equipmentList"
-                      required
-                      rows="4"
-                    ></textarea>
-
-                    <div class="button-section">
-                      <br />
-                      <button class="btn btn-danger" onclick="prevPage(11)">
-                        Previous
-                      </button>
-                      <button class="btn btn-danger" onclick="nextPage(11)">
-                        Next
-                      </button>
-                    </div>
-                  </div>
-
-                  <div class="form-section page" id="page12">
                     <h5>Review Your Information</h5>
                     <hr />
                     <div id="review-info"></div>
                     <div class="button-section">
                       <br />
-                      <button class="btn btn-danger" onclick="prevPage(12)">
+                      <button
+                        class="btn btn-danger"
+                        onclick="prevPage(event, 11)"
+                      >
                         Previous
                       </button>
-                      <button class="btn btn-danger" onclick="nextPage(12)">
+                      <button
+                        class="btn btn-danger"
+                        onclick="nextPage(event, 11)"
+                      >
                         Next
                       </button>
                     </div>
                   </div>
 
-                  <div class="form-section consent page" id="page13">
+                  <div class="form-section consent page" id="page12">
                     <p>
                       I consent to the processing of my information in
                       accordance with the privacy policy.
                     </p>
                     <div class="button-section">
                       <br />
-                      <button class="btn btn-danger" onclick="prevPage(13)">
+                      <button
+                        class="btn btn-danger"
+                        onclick="prevPage(event, 12)"
+                      >
                         Previous
                       </button>
                       <button class="btn btn-danger" type="submit">
@@ -359,10 +407,18 @@
 
               <ul>
                 <li>
-                  <a href="#"><span class="ti-facebook"></span></a>
+                  <a
+                    href="https://www.facebook.com/lorongbelakangcyberjaya/?locale=ms_MY"
+                    target="_blank"
+                    ><span class="ti-facebook"></span
+                  ></a>
                 </li>
                 <li>
-                  <a href="#"><span class="ti-instagram"></span></a>
+                  <a
+                    href="https://www.instagram.com/lorongbelakangcyberjaya/"
+                    target="_blank"
+                    ><span class="ti-instagram"></span
+                  ></a>
                 </li>
               </ul>
             </div>
@@ -377,19 +433,25 @@
 </html>
 
 <script>
-  function nextPage(current) {
+  function nextPage(event, current) {
     event.preventDefault();
 
-    if (current === 11) {
+    // if (!validatePage(current)) {
+    //   alert("Please fill out all required fields.");
+    //   return;
+    // }
+
+    if (current === 10) {
       displayReviewInfo();
     }
 
-    // Move to the next page
     document.getElementById("page" + current).classList.remove("active");
     document.getElementById("page" + (current + 1)).classList.add("active");
   }
 
-  function prevPage(current) {
+  function prevPage(event, current) {
+    event.preventDefault();
+
     document.getElementById("page" + current).classList.remove("active");
     document.getElementById("page" + (current - 1)).classList.add("active");
   }
@@ -397,28 +459,22 @@
   function displayReviewInfo() {
     const reviewInfoDiv = document.getElementById("review-info");
 
-    // Gather information from form inputs
     const vendorName = document.getElementById("vendorName").value;
-    const businessName = document.getElementById("businessName").value;
     const email = document.getElementById("email").value;
-    const whatsapp = document.getElementById("whatsapp").value;
+    const ssm = document.getElementById("SSM").value;
+    const phoneNumber = document.getElementById("phoneNumber").value;
     const socialMedia = document.getElementById("socialMedia").value;
-    const category = document.getElementById("productCategory").value;
+    const productName = document.getElementById("productName").value;
     const productType = document.getElementById("productType").value;
-    const equipmentList = document.getElementById("equipmentList").value;
 
-    // Gather file information
     const productPictures = Array.from(
       document.getElementById("productPicture").files
     );
-    const certificates = Array.from(
-      document.getElementById("certificateUpload").files
+    const typhoidCertificate = Array.from(
+      document.getElementById("typhoidCertificate").files
     );
-    const registrationCertificate = document.getElementById(
-      "registrationCertificate"
-    ).files[0];
+    const productMenu = document.getElementById("productMenu").files[0];
 
-    // Function to format file list
     function formatFileList(files) {
       if (files.length === 0) return "<p>No files uploaded.</p>";
       return `<ul>${files
@@ -426,32 +482,43 @@
         .join("")}</ul>`;
     }
 
-    // Populate review page
     reviewInfoDiv.innerHTML = `
         <p><strong>Vendor's Name:</strong> ${vendorName}</p>
-        <p><strong>Business's Name:</strong> ${businessName}</p>
         <p><strong>Email:</strong> ${email}</p>
-        <p><strong>WhatsApp Number:</strong> ${whatsapp}</p>
+        <p><strong>Phone Number:</strong> ${phoneNumber}</p>
         <p><strong>Social Media:</strong></p>
         <pre>${socialMedia}</pre>
-        <p><strong>Product Category:</strong> ${category}</p>
+        <p><strong>SSM Number:</strong> ${ssm}</p>
+        <p><strong>Product Name:</strong> ${productName}</p>
         <p><strong>Product Type:</strong> ${productType}</p>
-        <p><strong>Equipment List:</strong></p>
-        <pre>${equipmentList}</pre>
         <p><strong>Product Pictures:</strong></p>
         ${formatFileList(productPictures)}
-        <p><strong>Uploaded Certificates:</strong></p>
-        ${formatFileList(certificates)}
-        <p><strong>Company Registration Certificate:</strong></p>
+        <p><strong>Uploaded Typhoid Certificate:</strong></p>
+        ${formatFileList(typhoidCertificate)}
+        <p><strong>Product Menu:</strong></p>
         ${
-          registrationCertificate
-            ? `<ul><li>${registrationCertificate.name} (${registrationCertificate.type})</li></ul>`
+          productMenu
+            ? `<ul><li>${productMenu.name} (${productMenu.type})</li></ul>`
             : "<p>No file uploaded.</p>"
         }
         `;
   }
 
-  function submitForm() {
+  function validatePage(pageNumber) {
+    const page = document.getElementById(`page${pageNumber}`);
+    const inputs = page.querySelectorAll("input, textarea, select");
+    let isValid = true;
+
+    inputs.forEach((input) => {
+      if (!input.checkValidity()) {
+        isValid = false;
+      }
+    });
+
+    return isValid;
+  }
+
+  function submitForm(event) {
     event.preventDefault();
 
     const form = document.getElementById("registrationForm");
