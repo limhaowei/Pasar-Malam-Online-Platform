@@ -13,7 +13,6 @@
   <body class="login">
     <div class="login-box">
       <img src="images/logo.jpg" alt="Login Image" class="login-image" />
-      <h2>LOGIN</h2>
       <form action="/login" method="post">
         <div class="input-group">
           <input type="text" id="email" name="email" class="input" required />
@@ -29,6 +28,10 @@
           />
           <label class="label">Password</label>
         </div>
+        <label>
+          <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> Remember me
+        </label>
+
         <div class="login-type">
           <button type="submit" name="login-type" value="normal">
             User Login
@@ -36,6 +39,7 @@
           <button type="submit" name="login-type" value="vendor">
             Vendor Login
           </button>
+
         </div>
       </form>
     </div>
