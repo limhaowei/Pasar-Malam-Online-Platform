@@ -32,12 +32,14 @@
                       >Sign In</a
                     >
                   </li>
-                  <li>
-                    <a
-                      class="btn btn-outline-light top-btn"
-                      href="register-vendor.html"
-                      ><span class="ti-plus"></span> Register</a
-                    >
+                  <li class="nav-item dropdown">
+                    <a class="btn btn-outline-light dropbtn">
+                      <span class="ti-plus"></span> Register
+                    </a>
+                    <div class="dropdown-content">
+                      <a href="register-user.html">User</a>
+                      <a href="register-vendor.html">Vendor</a>
+                    </div>
                   </li>
                 </ul>
               </div>
@@ -234,7 +236,6 @@
                       name="productType"
                       required
                     >
-                      <option value="">Select Type</option>
                       <option value="F&B">F&B</option>
                       <option value="Non-F&B">Non-F&B</option>
                     </select>

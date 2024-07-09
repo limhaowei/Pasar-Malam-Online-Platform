@@ -9,7 +9,7 @@
     <link href="css/themify-icons.css" rel="stylesheet" />
     <link href="css/style.css" rel="stylesheet" />
 
-    <title>Company Name</title>
+    <title>Register As A User</title>
   </head>
 
   <body>
@@ -49,82 +49,79 @@
       </div>
     </div>
 
-    <section class="company-block">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-6">
-            <h5>Company</h5>
-          </div>
-          <div class="col-md-6">
-            <div class="company-seat-block">
-              <!-- Review are only available to logged in users. -->
-              <div class="review-btn">
-                <a class="btn btn-outline-danger" href="review.html"
-                  >Leave a Review</a
-                >
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
     <section class="light-bg company-details_wrap">
       <div class="container">
-        <div class="row">
-          <div class="col-md-8 responsive-wrap">
-            <div class="company-checkbox_wrap">
-              <div class="company-checkbox">
-                <p>Company brief</p>
+        <div class="row justify-content-center">
+          <div class="col-md-9 responsive-wrap">
+            <div class="register-wrap">
+              <div class="register">
+                <h5>Register As A User</h5>
               </div>
             </div>
-            <div class="company-checkbox_wrap mt-4">
-              <h5>Reviews</h5>
-              <hr />
-              <div class="customer-review_wrap">
-                <div class="customer-name">
-                  <p>Name</p>
-                </div>
-                <div class="customer-content-wrap">
-                  <div class="customer-content">
-                    <div class="customer-review">
-                      <h6>Title</h6>
+            <div class="register-wrap mt-4">
+              <div class="register form">
+                <form
+                  aria-label="User Registration Form"
+                  enctype="multipart/form-data"
+                  id="userRegistrationForm"
+                  method="POST"
+                  onsubmit="submitForm(event)"
+                >
+                  <div class="form-section" id="page1">
+                    <label for="username">Username:</label>
+                    <input
+                      class="input-field"
+                      id="username"
+                      name="username"
+                      required
+                      type="text"
+                    />
+
+                    <label for="email">Email:</label>
+                    <input
+                      class="input-field"
+                      id="email"
+                      name="email"
+                      required
+                      type="email"
+                    />
+
+                    <label for="password">Password:</label>
+                    <input
+                      class="input-field"
+                      id="password"
+                      name="password"
+                      type="password"
+                      minlength="8"
+                      pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                      title="Must contain at least one  number and one uppercase and lowercase letter, and at least 8 or more characters"
+                      required
+                    />
+
+                    <label for="profilePicture">Profile Picture:</label>
+                    <div class="input-field">
+                      <input
+                        accept="image/*"
+                        id="profilePicture"
+                        name="profilePicture"
+                        type="file"
+                      />
+                    </div>
+                    <br />
+                    <hr />
+                    <p>
+                      I consent to the processing of my information in
+                      accordance with the privacy policy.
+                    </p>
+
+                    <div class="button-section">
+                      <br />
+                      <button class="btn btn-danger" type="submit">
+                        Submit
+                      </button>
                     </div>
                   </div>
-                  <p class="customer-text">Comment</p>
-                </div>
-              </div>
-              <hr />
-              <div class="customer-review_wrap">
-                <div class="customer-review_wrap">
-                  <div class="customer-name">
-                    <p>Name</p>
-                  </div>
-                  <div class="customer-content-wrap">
-                    <div class="customer-content">
-                      <div class="customer-review">
-                        <h6>Title</h6>
-                      </div>
-                    </div>
-                    <p class="customer-text">Comment</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4 responsive-wrap">
-            <div class="contact-info">
-              <div class="address">
-                <span class="icon-location-pin"></span>
-                <p>address</p>
-              </div>
-              <div class="address">
-                <span class="icon-screen-smartphone"></span>
-                <p>phone number</p>
-              </div>
-              <div class="address">
-                <span class="icon-link"></span>
-                <p>social media</p>
+                </form>
               </div>
             </div>
           </div>
@@ -171,3 +168,30 @@
     <script src="scripts/bootstrap.min.js"></script>
   </body>
 </html>
+
+<script>
+  function submitForm(event) {
+    event.preventDefault();
+
+    const form = document.getElementById("userRegistrationForm");
+    const formData = new FormData(form);
+
+    fetch("/register", {
+      method: "POST",
+      body: formData,
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.success) {
+          alert("Registration successful!");
+          window.location.href = "/index";
+        } else {
+          alert("Registration failed. Please try again.");
+        }
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+        alert("Registration failed. Please try again.");
+      });
+  }
+</script>
