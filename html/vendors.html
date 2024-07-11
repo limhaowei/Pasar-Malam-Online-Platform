@@ -214,12 +214,14 @@
       let loadedVendors = 0;
       const vendorsPerLoad = 6;
 
-      function createStarRating(rating, index) {
+      function createStarRating(rating, vendorIndex) {
         let starHtml = '';
         for (let i = 1; i <= 5; i++) {
-            const starId = `rate-${index}-${i}`;
-            starHtml += `<input type="radio" name="rate-${index}" id="${starId}" ${i === rating ? 'checked' : ''}>
-                        <label for="${starId}" class="fa fa-star"></label>`;
+            const starId = `rate-${vendorIndex}-${i}`;
+            starHtml += `
+                <input type="radio" name="rate-${vendorIndex}" id="${starId}" ${i === rating ? 'checked' : ''}>
+                <label for="${starId}" class="fa fa-star"></label>
+            `;
         }
         return starHtml;
       }
@@ -242,7 +244,7 @@
                         <img alt="#" class="img-fluid" src="${vendor.image}"/>
                         <div class="vendor-title-box">
                           <h6>${vendor.name} 
-                            <div class="star-widget">${createStarRating(vendor.rating)}</div></h6>
+                            <div class="star-widget">${createStarRating(vendor.rating, i)}</div></h6>
                             <p>${vendor.type}</p>
                             <ul class="address">
                                 <li><span class="icon-screen-smartphone"></span><p>${vendor.phone}</p></li>
