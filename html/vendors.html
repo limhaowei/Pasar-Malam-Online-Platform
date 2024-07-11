@@ -3,7 +3,10 @@
   <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
     <link href="css/bootstrap.min.css" rel="stylesheet" />
     <link href="css/simple-line-icons.css" rel="stylesheet" />
     <link href="css/themify-icons.css" rel="stylesheet" />
@@ -120,7 +123,7 @@
         {
           name: "Food 1",
           type: "Food",
-          address: "Address 1",
+          rating: "65",
           phone: "1234567890",
           social: "Social 1",
           image: "images/featured1.jpg",
@@ -128,7 +131,7 @@
         {
           name: "Fashion 1",
           type: "Fashion",
-          address: "Address 2",
+          rating: "60",
           phone: "0987654321",
           social: "Social 2",
           image: "images/featured2.jpg",
@@ -136,7 +139,7 @@
         {
           name: "Decoration 3",
           type: "Decoration",
-          address: "Address 2",
+          rating: "70",
           phone: "0987654321",
           social: "Social 2",
           image: "images/featured2.jpg",
@@ -144,7 +147,7 @@
         {
           name: "Vendor 4",
           type: "Fashion",
-          address: "Address 2",
+          rating: "80",
           phone: "0987654321",
           social: "Social 2",
           image: "images/featured2.jpg",
@@ -152,7 +155,7 @@
         {
           name: "Vendor 5",
           type: "Type 2",
-          address: "Address 2",
+          rating: "58",
           phone: "0987654321",
           social: "Social 2",
           image: "images/featured2.jpg",
@@ -160,7 +163,7 @@
         {
           name: "Vendor 6",
           type: "Type 2",
-          address: "Address 2",
+          rating: "100",
           phone: "0987654321",
           social: "Social 2",
           image: "images/featured2.jpg",
@@ -168,6 +171,7 @@
         {
           name: "Vendor 7",
           type: "Type 2",
+          rating: "73",
           address: "Address 2",
           phone: "0987654321",
           social: "Social 2",
@@ -176,7 +180,7 @@
         {
           name: "Vendor 8",
           type: "Type 2",
-          address: "Address 2",
+          rating: "36",
           phone: "0987654321",
           social: "Social 2",
           image: "images/featured2.jpg",
@@ -184,6 +188,7 @@
         {
           name: "Vendor 9",
           type: "Type 2",
+          rating: "15",
           address: "Address 2",
           phone: "0987654321",
           social: "Social 2",
@@ -192,7 +197,7 @@
         {
           name: "Vendor 10",
           type: "Type 2",
-          address: "Address 2",
+          rating: "20",
           phone: "0987654321",
           social: "Social 2",
           image: "images/featured2.jpg",
@@ -200,7 +205,7 @@
         {
           name: "Vendor 11",
           type: "Type 2",
-          address: "Address 2",
+          rating: "10",
           phone: "0987654321",
           social: "Social 2",
           image: "images/featured2.jpg",
@@ -208,7 +213,7 @@
         {
           name: "Vendor 12",
           type: "Type 2",
-          address: "Address 2",
+          rating: "100",
           phone: "0987654321",
           social: "Social 2",
           image: "images/featured2.jpg",
@@ -216,7 +221,7 @@
         {
           name: "Vendor 13",
           type: "Type 2",
-          address: "Address 2",
+          rating: "70",
           phone: "0987654321",
           social: "Social 2",
           image: "images/featured2.jpg",
@@ -244,9 +249,31 @@
                         <img alt="#" class="img-fluid" src="${vendor.image}"/>
                         <div class="vendor-title-box">
                             <h6>${vendor.name}</h6>
+                            <div class="rating">
+                              <div class="star-rating" title="${vendor.rating}%">
+                                <div class="back-stars">
+                                  <i class="fa fa-star" aria-hidden="true"></i>
+                                  <i class="fa fa-star" aria-hidden="true"></i>
+                                  <i class="fa fa-star" aria-hidden="true"></i>
+                                  <i class="fa fa-star" aria-hidden="true"></i>
+                                  <i class="fa fa-star" aria-hidden="true"></i>
+
+                                  <div class="front-stars" style="width: ${vendor.rating}%">
+                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                  </div>
+                                </div>
+                                <span></span>
+                                <button href="review.html" class="btn btn-outline-light">
+                                  Rate
+                                </button>
+                              </div>
+                            </div>
                             <p>${vendor.type}</p>
                             <ul class="address">
-                                <li><span class="icon-location-pin"></span><p>${vendor.address}</p></li>
                                 <li><span class="icon-screen-smartphone"></span><p>${vendor.phone}</p></li>
                                 <li><span class="icon-link"></span><p>${vendor.social}</p></li>
                             </ul>
@@ -309,9 +336,31 @@
                         <img alt="#" class="img-fluid" src="${vendor.image}"/>
                         <div class="vendor-title-box">
                             <h6>${vendor.name}</h6>
+                            <div class="rating">
+                              <div class="star-rating" title="${vendor.rating}%">
+                                <div class="back-stars">
+                                  <i class="fa fa-star" aria-hidden="true"></i>
+                                  <i class="fa fa-star" aria-hidden="true"></i>
+                                  <i class="fa fa-star" aria-hidden="true"></i>
+                                  <i class="fa fa-star" aria-hidden="true"></i>
+                                  <i class="fa fa-star" aria-hidden="true"></i>
+
+                                  <div class="front-stars" style="width: ${vendor.rating}%">
+                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                  </div>
+                                </div>
+                                <span></span>
+                                <button href="review.html" class="btn btn-outline-light">
+                                  Rate
+                                </button>
+                              </div>
+                            </div>
                             <p>${vendor.type}</p>
                             <ul class="address">
-                                <li><span class="icon-location-pin"></span><p>${vendor.address}</p></li>
                                 <li><span class="icon-screen-smartphone"></span><p>${vendor.phone}</p></li>
                                 <li><span class="icon-link"></span><p>${vendor.social}</p></li>
                             </ul>
