@@ -3,14 +3,12 @@
   <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
-    />
+
     <link href="css/bootstrap.min.css" rel="stylesheet" />
     <link href="css/simple-line-icons.css" rel="stylesheet" />
     <link href="css/themify-icons.css" rel="stylesheet" />
     <link href="css/style.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <title>Vendors</title>
   </head>
@@ -172,7 +170,6 @@
           name: "Vendor 7",
           type: "Type 2",
           rating: "73",
-          address: "Address 2",
           phone: "0987654321",
           social: "Social 2",
           image: "images/featured2.jpg",
@@ -189,7 +186,6 @@
           name: "Vendor 9",
           type: "Type 2",
           rating: "15",
-          address: "Address 2",
           phone: "0987654321",
           social: "Social 2",
           image: "images/featured2.jpg",
@@ -231,6 +227,18 @@
       let loadedVendors = 0;
       const vendorsPerLoad = 6;
 
+      function createStarRating(rating, vendorIndex) {
+        let starHtml = '';
+        for (let i = 1; i <= 5; i++) {
+            const starId = `rate-${vendorIndex}-${i}`;
+            starHtml += `
+                <input type="radio" name="rate-${vendorIndex}" id="${starId}" ${i === rating ? 'checked' : ''}>
+                <label for="${starId}" class="fa fa-star"></label>
+            `;
+        }
+        return starHtml;
+      }
+
       function loadVendors() {
         const vendorList = document.getElementById("vendor-list");
         const fragment = document.createDocumentFragment();
@@ -248,30 +256,8 @@
                     <a href="detail.html">
                         <img alt="#" class="img-fluid" src="${vendor.image}"/>
                         <div class="vendor-title-box">
-                            <h6>${vendor.name}</h6>
-                            <div class="rating">
-                              <div class="star-rating" title="${vendor.rating}%">
-                                <div class="back-stars">
-                                  <i class="fa fa-star" aria-hidden="true"></i>
-                                  <i class="fa fa-star" aria-hidden="true"></i>
-                                  <i class="fa fa-star" aria-hidden="true"></i>
-                                  <i class="fa fa-star" aria-hidden="true"></i>
-                                  <i class="fa fa-star" aria-hidden="true"></i>
-
-                                  <div class="front-stars" style="width: ${vendor.rating}%">
-                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                  </div>
-                                </div>
-                                <span></span>
-                                <button href="review.html" class="btn btn-outline-light">
-                                  Rate
-                                </button>
-                              </div>
-                            </div>
+                          <h6>${vendor.name}
+                            <div class="star-widget">${createStarRating(vendor.rating, i)}</div></h6>
                             <p>${vendor.type}</p>
                             <ul class="address">
                                 <li><span class="icon-screen-smartphone"></span><p>${vendor.phone}</p></li>

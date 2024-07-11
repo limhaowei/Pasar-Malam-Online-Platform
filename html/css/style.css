@@ -1089,6 +1089,35 @@ input:valid {
   border-radius: 10px;
 }
 
+/* rating - 5 stars */
+.star-widget {
+  display: inline-block;
+}
+
+.star-widget input {
+  display: none;
+}
+
+.star-widget label {
+  font-size: 20px;
+  color: #444;
+  padding: 5px;
+  float: right;
+  transition: all 0.2s ease;
+  position: relative;
+  top: 8px;
+  left: 10px;
+  cursor: pointer;
+}
+
+.star-widget input:not(:checked) ~ label:hover,
+.star-widget input:not(:checked) ~ label:hover ~ label {
+  color: #fd4;
+}
+
+.star-widget input:checked ~ label {
+  color: #fe7;
+}
 /* Rating */
 .rating .btn-outline-light {
   padding: 5px 10px;
