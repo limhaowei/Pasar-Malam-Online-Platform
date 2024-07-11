@@ -81,7 +81,8 @@ p {
   background: #212124;
 }
 
-ul, ol {
+ul,
+ol {
   line-height: 2;
 }
 
@@ -288,16 +289,6 @@ ul, ol {
 .styled-heading h3 {
   position: relative;
   padding: 0 0 23px;
-}
-
-.styled-heading h3:after {
-  position: absolute;
-  content: "";
-  width: 60px;
-  height: 3px;
-  background: #212124;
-  bottom: 0;
-  left: 50%;
 }
 
 /* vendors */
@@ -898,8 +889,7 @@ form {
   align-items: center;
   height: 100vh;
   margin: 0;
-  background: 
-    linear-gradient(135deg,white,rgb(200, 148, 51),black);
+  background: linear-gradient(135deg, white, rgb(200, 148, 51), black);
 }
 
 /* Login box */
@@ -1030,16 +1020,6 @@ input:valid {
   color: #f0f0f0;
   position: relative;
   padding: 0 0 23px;
-}
-
-#vendor-of-the-week .styled-heading h3:after {
-  position: absolute;
-  content: "";
-  width: 60px;
-  height: 3px;
-  background: #f0f0f0;
-  bottom: 0;
-  left: 50%;
 }
 
 .vendor-image {
