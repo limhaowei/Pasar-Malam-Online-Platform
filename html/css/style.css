@@ -892,12 +892,14 @@ form {
 
 /* Body styles */
 .login {
-  background-color: #f0f0f0;
+  /* background-color: #f0f0f0; */
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
   margin: 0;
+  background: 
+    linear-gradient(135deg,white,rgb(200, 148, 51),black);
 }
 
 /* Login box */
@@ -997,16 +999,16 @@ input:valid {
 }
 
 .login-box .login-type button:nth-child(1) {
-  background-color: #3498db;
+  background-color: #e6ba2b;
   color: white;
   margin-right: 5px;
 }
 
-.login-box .login-type button:nth-child(2) {
+/* .login-box .login-type button:nth-child(2) {
   background-color: #e74c3c;
   color: white;
   margin-left: 5px;
-}
+} */
 
 .login-box .login-type button:hover {
   opacity: 0.8;
