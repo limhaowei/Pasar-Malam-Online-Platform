@@ -1146,3 +1146,88 @@ input:valid {
   top: 0;
   transition: all 0.5s;
 }
+
+/* User Guide */
+#user-guide p,
+li {
+  font-size: 18px;
+  color: #212124;
+}
+
+#user-guide h5 {
+  font-size: 20px;
+  font-weight: bold;
+  color: #212124;
+}
+
+#user-guide .register {
+  text-align: left;
+  padding: 30px 60px;
+}
+
+#user-guide .question {
+  font-weight: bold;
+}
+
+#user-guide a {
+  color: #212124;
+}
+
+#user-guide a:hover {
+  background-color: #212124;
+  color: #f9f9f9;
+}
+
+/* Vendor Detail */
+.vendor-detail p,
+li {
+  font-size: 18px;
+  color: #212124;
+}
+
+.vendor-detail h5 {
+  font-size: 20px;
+  font-weight: bold;
+  color: #212124;
+}
+
+.vendor-detail h6 {
+  font-weight: bold;
+  color: #212124;
+}
+
+.vendor-detail .register {
+  text-align: left;
+  padding: 10px 20px;
+}
+
+.vendor-detail .address {
+  font-size: 16px;
+  text-align: left;
+  padding: 10px 5px;
+}
+
+/* Blog */
+#blog .register {
+  text-align: left;
+  padding: 10px 20px;
+}
+
+#blog p,
+li {
+  font-size: 18px;
+  color: #212124;
+  line-height: 2;
+}
+
+#blog h5 {
+  font-size: 20px;
+  font-weight: bold;
+  color: #212124;
+}
+
+.register h5 {
+  font-size: 20px;
+  font-weight: bold;
+  color: #212124;
+}

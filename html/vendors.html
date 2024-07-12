@@ -8,7 +8,10 @@
     <link href="css/simple-line-icons.css" rel="stylesheet" />
     <link href="css/themify-icons.css" rel="stylesheet" />
     <link href="css/style.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
 
     <title>Vendors</title>
   </head>
@@ -119,7 +122,7 @@
       // TODO: write function to fetch vendors data from database
       let vendors = [
         {
-          name: "Food 1",
+          name: "Frozen Meal",
           type: "Food",
           rating: "65",
           phone: "1234567890",
@@ -127,7 +130,7 @@
           image: "images/featured1.jpg",
         },
         {
-          name: "Fashion 1",
+          name: "Hat",
           type: "Fashion",
           rating: "60",
           phone: "0987654321",
@@ -135,36 +138,36 @@
           image: "images/featured2.jpg",
         },
         {
-          name: "Decoration 3",
+          name: "Art Painting",
           type: "Decoration",
           rating: "70",
           phone: "0987654321",
-          social: "Social 2",
-          image: "images/featured2.jpg",
+          social: "Social 3",
+          image: "images/featured3.jpg",
         },
         {
-          name: "Vendor 4",
-          type: "Fashion",
+          name: "Cosmic",
+          type: "Kitchen",
           rating: "80",
           phone: "0987654321",
-          social: "Social 2",
-          image: "images/featured2.jpg",
+          social: "Social 4",
+          image: "images/featured1.jpg",
         },
         {
-          name: "Vendor 5",
-          type: "Type 2",
+          name: "Be Candle",
+          type: "Fragrance",
           rating: "58",
           phone: "0987654321",
-          social: "Social 2",
+          social: "Social 5",
           image: "images/featured2.jpg",
         },
         {
-          name: "Vendor 6",
-          type: "Type 2",
+          name: "Cuppe",
+          type: "Glass Cup",
           rating: "100",
           phone: "0987654321",
-          social: "Social 2",
-          image: "images/featured2.jpg",
+          social: "Social 6",
+          image: "images/featured3.jpg",
         },
         {
           name: "Vendor 7",
@@ -228,11 +231,13 @@
       const vendorsPerLoad = 6;
 
       function createStarRating(rating, vendorIndex) {
-        let starHtml = '';
+        let starHtml = "";
         for (let i = 1; i <= 5; i++) {
-            const starId = `rate-${vendorIndex}-${i}`;
-            starHtml += `
-                <input type="radio" name="rate-${vendorIndex}" id="${starId}" ${i === rating ? 'checked' : ''}>
+          const starId = `rate-${vendorIndex}-${i}`;
+          starHtml += `
+                <input type="radio" name="rate-${vendorIndex}" id="${starId}" ${
+            i === rating ? "checked" : ""
+          }>
                 <label for="${starId}" class="fa fa-star"></label>
             `;
         }
@@ -274,10 +279,9 @@
                                     <i class="fa fa-star" aria-hidden="true"></i>
                                   </div>
                                 </div>
-                                <span></span>
-                                <button href="review.html" class="btn btn-outline-light">
+                                <a href="review.html" class="btn btn-outline-light">
                                   Rate
-                                </button>
+                                </a>
                               </div>
                             </div>
                             <p>${vendor.type}</p>
@@ -361,10 +365,9 @@
                                     <i class="fa fa-star" aria-hidden="true"></i>
                                   </div>
                                 </div>
-                                <span></span>
-                                <button href="review.html" class="btn btn-outline-light">
+                                <a href="review.html" class="btn btn-outline-light">
                                   Rate
-                                </button>
+                                </a>
                               </div>
                             </div>
                             <p>${vendor.type}</p>

@@ -51,8 +51,8 @@
 
     <section class="light-bg company-details_wrap" id="blog">
       <div class="container">
-        <div class="row">
-          <div class="col-md-12 responsive-wrap">
+        <div class="row justify-content-center">
+          <div class="col-md-10 responsive-wrap">
             <div class="register-wrap">
               <div class="register">
                 <h5>Apply for a Slot in Upcoming Lorong Belakang</h5>
@@ -268,24 +268,8 @@
                         Day 2 - Silver RM 50 (Non F&B only)
                       </option>
                     </select>
-                    <div class="button-section">
-                      <br />
-                      <button
-                        class="btn btn-danger"
-                        onclick="prevPage(event, 3)"
-                      >
-                        Previous
-                      </button>
-                      <button
-                        class="btn btn-danger"
-                        onclick="nextPage(event, 3)"
-                      >
-                        Next
-                      </button>
-                    </div>
-                  </div>
 
-                  <div class="form-section page" id="page4">
+                    <br />
                     <label for="equipmentList">Equipment List: </label>
                     <ol>
                       <li>Fan / Light</li>
@@ -316,20 +300,20 @@
                       <br />
                       <button
                         class="btn btn-danger"
-                        onclick="prevPage(event, 4)"
+                        onclick="prevPage(event, 3)"
                       >
                         Previous
                       </button>
                       <button
                         class="btn btn-danger"
-                        onclick="nextPage(event, 4)"
+                        onclick="nextPage(event, 3)"
                       >
                         Next
                       </button>
                     </div>
                   </div>
 
-                  <div class="form-section page" id="page5">
+                  <div class="form-section page" id="page4">
                     <h5>Review Your Information</h5>
                     <hr />
                     <div id="review-info"></div>
@@ -339,7 +323,7 @@
                       <br />
                       <button
                         class="btn btn-danger"
-                        onclick="prevPage(event, 5)"
+                        onclick="prevPage(event, 4)"
                       >
                         Previous
                       </button>
@@ -404,7 +388,7 @@
       return;
     }
 
-    if (current === 4) {
+    if (current === 3) {
       displayReviewInfo();
     }
 
