@@ -120,7 +120,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="rateModalLabel">Rate Vendor</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="resetForm()"></button>
         </div>
         <div class="modal-body">
           <form id="rateForm">
@@ -136,10 +136,10 @@
               <input type="radio" name="rate" id="rate5">
               <label for="rate5" class="fa fa-star"></label>
               <div class="textarea">
-                <textarea cols="55" rows="5" placeholder="Describe your experience..."></textarea>
+                <textarea id="feedbackTextarea" cols="55" rows="5" placeholder="Describe your experience..."></textarea>
               </div>
               <div class="text-center mt-3">
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-primary" id="clear">Submit</button>
               </div>
             </div>
           </form>
@@ -264,18 +264,22 @@
       let loadedVendors = 0;
       const vendorsPerLoad = 6;
 
-      function createStarRating(rating, vendorIndex) {
-        let starHtml = "";
-        for (let i = 1; i <= 5; i++) {
-          const starId = `rate-${vendorIndex}-${i}`;
-          starHtml += `
-                <input type="radio" name="rate-${vendorIndex}" id="${starId}" ${
-            i === rating ? "checked" : ""
-          }>
-                <label for="${starId}" class="fa fa-star"></label>
-            `;
-        }
-        return starHtml;
+      // function createStarRating(rating, vendorIndex) {
+      //   let starHtml = "";
+      //   for (let i = 1; i <= 5; i++) {
+      //     const starId = `rate-${vendorIndex}-${i}`;
+      //     starHtml += `
+      //           <input type="radio" name="rate-${vendorIndex}" id="${starId}" ${
+      //       i === rating ? "checked" : ""
+      //     }>
+      //           <label for="${starId}" class="fa fa-star"></label>
+      //       `;
+      //   }
+      //   return starHtml;
+      // }
+
+      function resetForm() {
+        document.getElementById("rateForm").reset();  
       }
 
       function loadVendors() {
