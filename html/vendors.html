@@ -114,6 +114,40 @@
       </div>
     </footer>
 
+  <!-- Rate Modal -->
+  <div class="modal fade" id="rateModal" >
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="rateModalLabel">Rate Vendor</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form id="rateForm">
+            <div class="star-widget">
+              <input type="radio" name="rate" id="rate1">
+              <label for="rate1" class="fa fa-star"></label>
+              <input type="radio" name="rate" id="rate2">
+              <label for="rate2" class="fa fa-star"></label>
+              <input type="radio" name="rate" id="rate3">
+              <label for="rate3" class="fa fa-star"></label>
+              <input type="radio" name="rate" id="rate4">
+              <label for="rate4" class="fa fa-star"></label>
+              <input type="radio" name="rate" id="rate5">
+              <label for="rate5" class="fa fa-star"></label>
+              <div class="textarea">
+                <textarea cols="55" rows="5" placeholder="Describe your experience..."></textarea>
+              </div>
+              <div class="text-center mt-3">
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
     <script src="scripts/jQuery-3.7.1.min.js"></script>
     <script src="scripts/bootstrap.min.js"></script>
 
@@ -279,7 +313,7 @@
                                     <i class="fa fa-star" aria-hidden="true"></i>
                                   </div>
                                 </div>
-                                <a href="review.html" class="btn btn-outline-light">
+                                <a href="#" class="btn btn-outline-light rate-btn" data-bs-toggle="modal" data-bs-target="#rateModal">
                                   Rate
                                 </a>
                               </div>
@@ -365,7 +399,7 @@
                                     <i class="fa fa-star" aria-hidden="true"></i>
                                   </div>
                                 </div>
-                                <a href="review.html" class="btn btn-outline-light">
+                                <a href="#" class="btn btn-outline-light rate-btn" data-bs-toggle="modal" data-bs-target="#rateModal">
                                   Rate
                                 </a>
                               </div>
