@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+
+    <link
+      href="{% static 'vendors/css/bootstrap.min.css' %}"
+      rel="stylesheet"
+    />
+    <link
+      href="{% static 'vendors/css/simple-line-icons.css' %}"
+      rel="stylesheet"
+    />
+    <link
+      href="{% static 'vendors/css/themify-icons.css' %}"
+      rel="stylesheet"
+    />
+    <link href="{% static 'vendors/css/style.css' %}" rel="stylesheet" />
+
+    <title>Lorong Belakang</title>
+  </head>
+
+  <body>
+    <div class="dark-bg sticky-top">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-12">
+            <nav class="navbar navbar-expand-lg navbar-light">
+              <a class="navbar-brand" href="{% url 'homepage' %}"
+                >Lorong Belakang</a
+              >
+              <div class="navbar-collapse justify-content-end">
+                <ul class="navbar-nav">
+                  <li class="nav-item">
+                    <a class="nav-link" href="{% url 'vendor_list' %}"
+                      >Vendors</a
+                    >
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="{% url 'user_guide' %}"
+                      >User Guide</a
+                    >
+                  </li>
+                  <li class="nav-item">
+                    <a
+                      class="btn btn-outline-light top-btn"
+                      href="{% url 'login' %}"
+                      >Sign In</a
+                    >
+                  </li>
+                  <li class="nav-item">
+                    <a
+                      class="btn btn-outline-light top-btn"
+                      href="{% url 'register_vendor' %}"
+                      ><span class="ti-plus"></span> Register</a
+                    >
+                  </li>
+                </ul>
+              </div>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% block content %} {% endblock %}
+
+    <footer class="main-block dark-bg">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="copyright">
+              <p>
+                Copyright &copy;
+                <script>
+                  document.write(new Date().getFullYear());
+                </script>
+                Youth Ventures Asia. <br />All rights reserved.
+              </p>
+
+              <ul>
+                <li>
+                  <a
+                    href="https://www.facebook.com/lorongbelakangcyberjaya/?locale=ms_MY"
+                    target="_blank"
+                    ><span class="ti-facebook"></span
+                  ></a>
+                </li>
+                <li>
+                  <a
+                    href="https://www.instagram.com/lorongbelakangcyberjaya/"
+                    target="_blank"
+                    ><span class="ti-instagram"></span
+                  ></a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.min.js"></script>
+  </body>
+</html>
