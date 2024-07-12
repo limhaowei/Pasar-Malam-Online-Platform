@@ -1,0 +1,20 @@
+{% extends 'main.html' %} {% load static %} {% block content %}
+<section class="light-bg company-details_wrap" id="blog">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-10 responsive-wrap">
+        <div class="register-wrap">
+          <h5>
+            {{title}} - {{ selected_vendor.name | default:"Selected Vendor" }}
+          </h5>
+        </div>
+        <div class="register-wrap mt-4">
+          <div class="register">
+            <p>{{ content }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

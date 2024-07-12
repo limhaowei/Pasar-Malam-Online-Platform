@@ -1,0 +1,129 @@
+{% extends 'main.html' %} {% load static %} {% block content %}
+
+<h1>Vendors</h1>
+<!-- Welcoming Section -->
+<div class="homepage-section">
+  <div class="text-container">
+    <h1>Welcome to Lorong Belakang Night Market</h1>
+    <p>
+      Experience the vibrant atmosphere, delicious food, and unique products at
+      our night market. Join us for an unforgettable evening of fun and
+      excitement!
+    </p>
+  </div>
+  <div class="image-container">
+    <img
+      src="{% static 'vendors/images/image.png' %}"
+      alt="Lorong Belakang Night Market"
+    />
+  </div>
+</div>
+
+<!-- Vendor of the Week Section -->
+<section class="main-block dark-bg" id="vendor-of-the-week">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-5">
+        <div class="styled-heading">
+          <h3>Vendor of the Week</h3>
+        </div>
+      </div>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-md-10">
+        <div class="vendor-wrap d-flex">
+          <div class="vendor-image col-md-5">
+            <img
+              alt="#"
+              class="img-fluid"
+              src="{% static 'vendors/images/featured1.jpg' %}"
+            />
+          </div>
+          <div class="vendor-info col-md-6">
+            <a href=""
+              ><h6>{{selected_vendor.name | default:"Selected Vendor"}}</h6></a
+            >
+            <hr />
+            <p>Blog Title</p>
+            <p>Blog Highlight</p>
+            <a href="{% url 'blog' %}">Read More</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Vendors Overview Section -->
+<section class="main-block light-bg" id="vendors">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-5">
+        <div class="styled-heading">
+          <h3>Vendors</h3>
+        </div>
+      </div>
+    </div>
+    <div class="row" id="vendor-brief">
+      {% for vendor in vendors %}
+      <div class="col-md-4 featured-responsive vendor-item">
+        <div class="vendor-wrap">
+          <a href="{% url 'vendor_detail' vendor.pk %}">
+            <img
+              alt="Product Picture"
+              class="img-fluid"
+              src="{{vendor.product_picture}}"
+            />
+            <div class="vendor-title-box">
+              <h6>{{vendor.name}}</h6>
+              <ul class="address">
+                <li>
+                  <span class="icon-screen-smartphone"></span>
+                  <p>{{vendor.phone_number}}</p>
+                </li>
+                <li>
+                  <span class="icon-link"></span>
+                  <p>{{vendor.social_media_alias}}</p>
+                </li>
+              </ul>
+            </div>
+          </a>
+        </div>
+      </div>
+      {% empty %}
+      <p>No vendors yet.</p>
+      {% endfor %}
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-md-4">
+        <div class="vendor-btn-wrap">
+          <a class="btn btn-danger" href="{% url 'vendor_list' %}">View All</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Registration Promotion Section -->
+<section class="main-block" id="register">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="register-wrap">
+          <h2>Join Lorong Belakang</h2>
+          <p>Register now to be part of our community!</p>
+        </div>
+      </div>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-md-4">
+        <div class="vendor-btn-wrap">
+          <a class="btn btn-danger" href="{% url 'register_vendor' %}"
+            ><span class="ti-plus"></span> Register</a
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

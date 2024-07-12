@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+
+    <link
+      href="{% static 'vendors/css/bootstrap.min.css' %}"
+      rel="stylesheet"
+    />
+    <link
+      href="{% static 'vendors/css/simple-line-icons.css' %}"
+      rel="stylesheet"
+    />
+    <link
+      href="{% static 'vendors/css/themify-icons.css' %}"
+      rel="stylesheet"
+    />
+    <link href="{% static 'vendors/css/style.css' %}" rel="stylesheet" />
+
+    <title>Lorong Belakang</title>
+  </head>
+
+  <body class="login">
+      <div class="login-box">
+        <img src="{% static 'vendors/images/logo.jpg' %}" alt="Login Image" class="login-image" />
+        <!-- <form action="/login" method="post"> -->
+          <div class="input-group">
+            <input type="text" id="email" name="email" class="input" required />
+            <label class="label">Email</label>
+          </div>
+          <div class="input-group">
+            <input
+              type="password"
+              id="password"
+              name="password"
+              class="input"
+              required
+            />
+            <label class="label">Password</label>
+          </div>
+          <label>
+            <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> Remember me
+          </label>
+
+          <div class="login-type">
+            <a href="{% url 'homepage' %}">
+              <button type="submit" name="login-type" value="normal">
+                Login
+              </button>
+            </a>
+            <!-- <a href="index.html">
+              <button type="submit" name="login-type" value="vendor">
+                Vendor Login
+              </button> -->
+            </a>
+          </div>
+        </form>
+      </div>
+  </body>
+  </html>
