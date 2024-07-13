@@ -18,12 +18,14 @@
   <div class="container">
     <div class="row">
       <div class="col-md-8 responsive-wrap">
-        <!-- Company Brief / Description -->
-        <!-- <div class="register-wrap">
+        <!-- Vendor Promotion / Brief / Description -->
+        <div class="register-wrap">
+          <h5>Promotion / Brief / Description</h5>
+          <hr />
           <div class="register">
-            <p>{{ vendor.description|default:"Coming soon!" }}</p>
+            <p>{{ vendor.promotion |default:"Coming soon!" }}</p>
           </div>
-        </div> -->
+        </div>
         <div class="register-wrap mt-4">
           <h5>Product</h5>
           <hr />
@@ -42,7 +44,14 @@
             </p>
 
             {% if vendor.menu %}
-            <a href="{{ vendor.menu }}" alt="product menu" download />
+            <a
+              href="{{ vendor.menu }}"
+              alt="product menu"
+              class="btn btn-outline-dark"
+              download
+            >
+              Download Product Menu</a
+            >
             {% else %}
             <p>Product list coming soon!</p>
             {% endif %}

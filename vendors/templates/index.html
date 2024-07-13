@@ -1,6 +1,5 @@
 {% extends 'main.html' %} {% load static %} {% block content %}
 
-<h1>Vendors</h1>
 <!-- Welcoming Section -->
 <div class="homepage-section">
   <div class="text-container">
@@ -33,19 +32,27 @@
       <div class="col-md-10">
         <div class="vendor-wrap d-flex">
           <div class="vendor-image col-md-5">
+            {% if selected_vendor %}
             <img
-              alt="#"
+              alt="Product Picture"
+              class="img-fluid"
+              src="{{selected_vendor.product_picture.url }}"
+            />
+            {% else %}
+            <img
+              alt="Product Picture"
               class="img-fluid"
               src="{% static 'vendors/images/featured1.jpg' %}"
             />
+            {% endif %}
           </div>
           <div class="vendor-info col-md-6">
             <a href=""
-              ><h6>{{selected_vendor.name | default:"Selected Vendor"}}</h6></a
+              ><h6>{{selected_vendor.name | default:"Coming Soon..."}}</h6></a
             >
             <hr />
-            <p>Blog Title</p>
-            <p>Blog Highlight</p>
+            <p>{{blog_title}}</p>
+            <p>{{blog_content | slice:"100"}}</p>
             <a href="{% url 'blog' %}">Read More</a>
           </div>
         </div>
@@ -72,7 +79,7 @@
             <img
               alt="Product Picture"
               class="img-fluid"
-              src="{{vendor.product_picture}}"
+              src="{{ vendor.product_picture.url }}"
             />
             <div class="vendor-title-box">
               <h6>{{vendor.name}}</h6>
@@ -91,7 +98,10 @@
         </div>
       </div>
       {% empty %}
-      <p>No vendors yet.</p>
+      <div class="register styled-heading">
+        <h5>No Vendors Yet.</h5>
+        <p>Stay Tuned.</p>
+      </div>
       {% endfor %}
     </div>
     <div class="row justify-content-center">

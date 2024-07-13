@@ -20,20 +20,25 @@
             >
               {% csrf_token %} {% for field in form %}
               <div class="form-section">
-                <label for="formInput#text">{{field.label}}</label>
+                <label for="formInput">{{field.label}}</label>
                 {{field}}
               </div>
               {% endfor %}
               <br />
               <hr />
-              <p>
-                I consent to the processing of my information in accordance with
-                the privacy policy.
-              </p>
+              <div class="form-section">
+                <br />
+                <h5>
+                  I consent to the processing of my information in accordance
+                  with the privacy policy.
+                </h5>
+              </div>
+
               <div class="button-section">
                 <br />
                 <button class="btn btn-danger" type="submit">Submit</button>
               </div>
+              <br />
             </form>
           </div>
         </div>

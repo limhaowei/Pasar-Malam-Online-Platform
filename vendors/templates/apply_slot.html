@@ -17,10 +17,12 @@
               method="POST"
               onsubmit="submitForm(event)"
             >
+              {% csrf_token %}
+              <!-- Market Information -->
               <div class="form-section page active" id="page1">
                 <h5>Slot and Package Details</h5>
                 <hr />
-                <p>Session: JULY 2024</p>
+                <p>Session: {{month}} {{year}}</p>
                 <p>Time: 4PM - 12AM</p>
                 <p>
                   Location : Lorong Belakang Cyberjaya @Shaftsbury Square,
@@ -87,6 +89,7 @@
                 </div>
               </div>
 
+              <!-- Terms and Conditions -->
               <div class="form-section page" id="page2">
                 <h5>Terms and Conditions</h5>
                 <hr />
@@ -180,6 +183,7 @@
                 </div>
               </div>
 
+              <!-- Market Slot Application Form -->
               <div class="form-section page" id="page3">
                 <label for="slotOption">Slot Date and Package:</label>
                 <select
@@ -231,31 +235,21 @@
                   rows="2"
                 ></textarea>
 
-                <div class="button-section">
+                 <br />
+                 <hr />
+                <div class="form-section">
                   <br />
-                  <button class="btn btn-danger" onclick="prevPage(event, 3)">
-                    Previous
-                  </button>
-                  <button class="btn btn-danger" onclick="nextPage(event, 3)">
-                    Next
-                  </button>
+                  <h5>
+                    I consent to the processing of my information in accordance
+                    with the privacy policy.
+                  </h5>
                 </div>
-              </div>
 
-              <div class="form-section page" id="page4">
-                <h5>Review Your Information</h5>
-                <hr />
-                <div id="review-info"></div>
-                <hr />
-                <p>By submitting, you agree to our Terms and Conditions.</p>
                 <div class="button-section">
                   <br />
-                  <button class="btn btn-danger" onclick="prevPage(event, 4)">
-                    Previous
-                  </button>
                   <button class="btn btn-danger" type="submit">Submit</button>
                 </div>
-              </div>
+              <br />
             </form>
           </div>
         </div>
@@ -313,31 +307,6 @@
     });
 
     return isValid;
-  }
-
-  function submitForm(event) {
-    event.preventDefault();
-
-    const form = document.getElementById("slotRegistrationForm");
-    const formData = new FormData(form);
-
-    fetch("/register", {
-      method: "POST",
-      body: formData,
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.success) {
-          alert("Application successful!");
-          window.location.href = "/vendors";
-        } else {
-          alert("Application failed. Please try again.");
-        }
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-        alert("Application failed. Please try again.");
-      });
   }
 </script>
 

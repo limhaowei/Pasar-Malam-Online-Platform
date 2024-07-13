@@ -1,79 +1,129 @@
 <!-- registration/templates/vendor_list.html -->
 {% extends 'main.html' %} {% load static %} {% block content %}
-<section class="main-block light-bg" id="vendors">
+<script
+  src="https://cdnjs.cloudflare.com/ajax/libs/htmx/2.0.1/htmx.min.js"
+  integrity="sha512-/POjPSnGjDaJfmt9O7LOTz1eGoCQNsVSJdgxYTVjhnWRDmuDFTvzwQrxIxipRrakLw7IYJfOsanDe7WuP40zxw=="
+  crossorigin="anonymous"
+  referrerpolicy="no-referrer"
+></script>
+
+<section class="light-bg company-details_wrap" id="vendors">
   <div class="container">
     <div class="row mb-3">
-      <div class="col-md-4">
-        <select id="searchCriteria" class="form-section search">
-          <option value="name">Search by Name</option>
-          <option value="business_type">Search by Business Type</option>
-        </select>
-      </div>
-      <div class="col-md-8">
-        <input
-          id="vendorSearch"
-          class="form-section search"
-          placeholder="Search for vendors..."
-        />
+      <div>
+        <form action="{% url 'search' %}" class="form-section"">
+            <input name="q"
+                  value="{{ request.GET.q }}"
+                  class="form-section search"
+                  placeholder="Search for vendors..."
+            >
+            </p>
+        </form>
       </div>
     </div>
+
     <div class="row" id="vendor-list">
       <!-- Vendors will be loaded here -->
-      {% for vendor in vendors %}
-      <div class="col-md-4 featured-responsive vendor-item">
-        <div class="vendor-wrap">
-          <a href="{% url 'vendor_detail' vendor.pk %}">
-            <img alt="#" class="img-fluid" src="{{vendor.product_picture}}" />
-            <div class="vendor-title-box">
-              <h6>{{vendor.name}}</h6>
-              <!-- <div class="rating">
-                <div class="star-rating" title="{{vendor.rating|default:'0'}}%">
-                  <div class="back-stars">
-                    <i class="fa fa-star" aria-hidden="true"></i>
-                    <i class="fa fa-star" aria-hidden="true"></i>
-                    <i class="fa fa-star" aria-hidden="true"></i>
-                    <i class="fa fa-star" aria-hidden="true"></i>
-                    <i class="fa fa-star" aria-hidden="true"></i>
+      {% for vendor in page_obj %}
+      <div class="vendors col-md-4">
+        <div class="featured-responsive">
+          <div class="vendor-wrap">
+            <a href="{% url 'vendor_detail' vendor.pk %}">
+              <img
+                alt="#"
+                class="img-fluid"
+                src="{{ vendor.product_picture.url }}"
+              />
+              <div class="vendor-title-box">
+                <h6>{{vendor.name}}</h6>
+                <div class="rating">
+                  {% if vendor.rating %}
+                  <div class="star-rating" title="{{vendor.rating}}%">
+                    <div class="back-stars">
+                      <i class="fa fa-star" aria-hidden="true"></i>
+                      <i class="fa fa-star" aria-hidden="true"></i>
+                      <i class="fa fa-star" aria-hidden="true"></i>
+                      <i class="fa fa-star" aria-hidden="true"></i>
+                      <i class="fa fa-star" aria-hidden="true"></i>
 
-                    <div
-                      class="front-stars"
-                      style="width: '{{vendor.rating|default:'0'}}%"
-                    >
-                      <i class="fa fa-star" aria-hidden="true"></i>
-                      <i class="fa fa-star" aria-hidden="true"></i>
-                      <i class="fa fa-star" aria-hidden="true"></i>
-                      <i class="fa fa-star" aria-hidden="true"></i>
-                      <i class="fa fa-star" aria-hidden="true"></i>
+                      <!-- not sure how to render the rating  -->
+                      <div
+                        class="front-stars"
+                        style="width: 0%"
+                      >
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                      </div>
                     </div>
                   </div>
-                  <a
-                    href="#"
-                    class="btn btn-outline-light rate-btn"
-                    data-bs-toggle="modal"
-                    data-bs-target="#rateModal"
-                  >
-                    Rate
-                  </a>
-                </div>
-              </div> -->
+                  {% else %}
+                  <div class="star-rating" title="0%">
+                    <div class="back-stars">
+                      <i class="fa fa-star" aria-hidden="true"></i>
+                      <i class="fa fa-star" aria-hidden="true"></i>
+                      <i class="fa fa-star" aria-hidden="true"></i>
+                      <i class="fa fa-star" aria-hidden="true"></i>
+                      <i class="fa fa-star" aria-hidden="true"></i>
 
-              <p>{{vendor.product_type}}</p>
-              <ul class="address">
-                <li>
-                  <span class="icon-screen-smartphone"></span>
-                  <p>{{vendor.phone_number}}</p>
-                </li>
-                <li>
-                  <span class="icon-link"></span>
-                  <p>{{vendor.social_media_alias}}</p>
-                </li>
-              </ul>
-            </div>
-          </a>
+                      <div class="front-stars" style="width: 0%">
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                      </div>
+                    </div>
+                    {% endif %}
+                    <a
+                      href="#"
+                      class="btn btn-outline-light rate-btn"
+                      data-bs-toggle="modal"
+                      data-bs-target="#rateModal"
+                    >
+                      Rate
+                    </a>
+                  </div>
+                </div>
+
+                <p>{{vendor.product_type}}</p>
+                <ul class="address">
+                  <li>
+                    <span class="icon-screen-smartphone"></span>
+                    <p>{{vendor.phone_number}}</p>
+                  </li>
+                  <li>
+                    <span class="icon-link"></span>
+                    <p>
+                      <a href="{{vendor.social_media_alias}}" target="_blank"
+                        >{{vendor.social_media_alias}}</a
+                      >
+                    </p>
+                  </li>
+                </ul>
+              </div>
+            </a>
+          </div>
         </div>
+
+        {% if page_obj.has_next and forloop.last %}
+        <span
+          hx-get="{% url 'vendor_list' %}?page={{ page_obj.next_page_number }}"
+          hx-swap="beforeend"
+          hx-target="#vendor-list"
+          hx-select=".vendors"
+          hx-trigger="revealed"
+        >
+        </span>
+        {% endif %}
       </div>
       {% empty %}
-      <p>No vendors yet.</p>
+      <div class="register styled-heading">
+        <h5>No Vendors Yet.</h5>
+        <p>Stay Tuned.</p>
+      </div>
       {% endfor %}
     </div>
   </div>
@@ -127,105 +177,9 @@
 </div>
 
 <script>
-  let loadedVendors = 0;
-  const vendorsPerLoad = 6;
-
   function resetForm() {
     document.getElementById("rateForm").reset();
   }
-
-  function handleScroll() {
-    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-    const scrollHeight = document.documentElement.scrollHeight;
-    const clientHeight = document.documentElement.clientHeight;
-
-    if (scrollTop + clientHeight >= scrollHeight - 5) {
-      loadVendors();
-    }
-  }
-
-  function handleSearch() {
-    const query = document.getElementById("vendorSearch").value.toLowerCase();
-    const searchCriteria = document.getElementById("searchCriteria").value;
-    const vendorList = document.getElementById("vendor-list");
-
-    // Reset result
-    vendorList.innerHTML = "";
-
-    // Filter vendors based on the search criteria
-    const filteredVendors = vendors.filter((vendor) => {
-      const name = vendor.name.toLowerCase();
-      const businessType = vendor.type.toLowerCase();
-
-      if (searchCriteria === "name" && name.includes(query)) {
-        return true;
-      } else if (
-        searchCriteria === "business_type" &&
-        businessType.includes(query)
-      ) {
-        return true;
-      }
-      return false;
-    });
-
-    // Display filtered vendors
-    const fragment = document.createDocumentFragment();
-    filteredVendors.forEach((vendor) => {
-      const vendorElement = document.createElement("div");
-      vendorElement.className = "col-md-4 featured-responsive vendor-item";
-      vendorElement.innerHTML = `
-            <div class="vendor-wrap">
-                <a href="detail.html">
-                    <img alt="#" class="img-fluid" src="${vendor.image}"/>
-                    <div class="vendor-title-box">
-                        <h6>${vendor.name}</h6>
-                        <div class="rating">
-                          <div class="star-rating" title="${vendor.rating}%">
-                            <div class="back-stars">
-                              <i class="fa fa-star" aria-hidden="true"></i>
-                              <i class="fa fa-star" aria-hidden="true"></i>
-                              <i class="fa fa-star" aria-hidden="true"></i>
-                              <i class="fa fa-star" aria-hidden="true"></i>
-                              <i class="fa fa-star" aria-hidden="true"></i>
-
-                              <div class="front-stars" style="width: ${vendor.rating}%">
-                                <i class="fa fa-star" aria-hidden="true"></i>
-                                <i class="fa fa-star" aria-hidden="true"></i>
-                                <i class="fa fa-star" aria-hidden="true"></i>
-                                <i class="fa fa-star" aria-hidden="true"></i>
-                                <i class="fa fa-star" aria-hidden="true"></i>
-                              </div>
-                            </div>
-                            <a href="#" class="btn btn-outline-light rate-btn" data-bs-toggle="modal" data-bs-target="#rateModal">
-                              Rate
-                            </a>
-                          </div>
-                        </div>
-                        <p>${vendor.type}</p>
-                        <ul class="address">
-                            <li><span class="icon-screen-smartphone"></span><p>${vendor.phone}</p></li>
-                            <li><span class="icon-link"></span><p>${vendor.social}</p></li>
-                        </ul>
-                    </div>
-                </a>
-            </div>
-        `;
-      fragment.appendChild(vendorElement);
-    });
-
-    vendorList.appendChild(fragment);
-  }
-
-  document.addEventListener("DOMContentLoaded", () => {
-    loadVendors();
-    window.addEventListener("scroll", handleScroll);
-    document
-      .getElementById("vendorSearch")
-      .addEventListener("input", handleSearch);
-    document
-      .getElementById("searchCriteria")
-      .addEventListener("change", handleSearch);
-  });
 </script>
 
 {% endblock %}

@@ -395,6 +395,24 @@ ol {
   margin: 0;
 }
 
+.vendor-title-box ul li:nth-child(2) p a {
+  color: #ebbe37;
+  font-weight: bold;
+
+  padding: 5px;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+}
+
+.vendor-title-box ul li:nth-child(2) p a:hover {
+  background-color: #ebbe37;
+  color: white;
+}
+
+.vendor-title-box .icon-link {
+  color: #ebbe37;
+}
+
 .vendor-btn-wrap {
   text-align: center;
 }
@@ -788,10 +806,28 @@ form {
   color: #212124;
 }
 
-.input-field {
+.form-section label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+input[type="file"]::file-selector-button {
+  background: #f0f0f0;
   border: none;
+  cursor: pointer;
+  padding-top: 10px;
+}
+
+input[type="text"],
+input[type="file"],
+input[type="number"],
+input[type="password"],
+select {
+  background: #f0f0f0;
+  border: none;
+  cursor: pointer;
   width: 100%;
-  background-color: #f0f0f0;
   margin: 10px 0;
   height: 55px;
   border-radius: 10px;
@@ -802,38 +838,14 @@ form {
   overflow: hidden;
 }
 
-.input-field-big {
-  border: none;
-  width: 100%;
-  background-color: #f0f0f0;
-  margin: 10px 0;
-  height: 100px;
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  position: relative;
-  padding: 15px;
-  font-size: 1.1rem;
-  justify-content: center;
-  overflow: hidden;
-}
-
 .form-section label {
   display: block;
   margin-bottom: 5px;
   font-weight: bold;
 }
 
-.input-field input[type="file"]::file-selector-button {
-  background: #f0f0f0;
-  color: #909090;
-  border: none;
-  cursor: pointer;
-}
-
 .consent {
-  font-size: 18px;
-  font-weight: 600;
+  font-weight: bold;
 }
 
 .page {
@@ -866,6 +878,27 @@ form {
 .button-section {
   margin: auto;
   text-align: center;
+}
+
+.button-section .btn-danger {
+  background: #212124;
+  padding: 10px 30px;
+  -webkit-transition: 0.3s;
+  -o-transition: 0.3s;
+  transition: 0.3s;
+  border: 0;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.button-section .btn-danger:hover,
+.button-section .btn-danger:focus {
+  background: #fff;
+  color: #212124;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  border: #909090 solid 1px;
+  border-radius: 10px;
 }
 
 .search {
