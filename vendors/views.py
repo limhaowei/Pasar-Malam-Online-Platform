@@ -83,7 +83,7 @@ def apply_slot(request):
 
 
 # vendor of the week
-def blog(request, pk):
+def blog(request):
     selected_vendor = Vendor.objects.all().first()
     context = {
         "selected_vendor": selected_vendor,
