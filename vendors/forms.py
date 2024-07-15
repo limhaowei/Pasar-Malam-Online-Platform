@@ -20,7 +20,7 @@ class VendorForm(forms.ModelForm):
 class MarketApplicantForm(forms.ModelForm):
     class Meta:
         model = MarketApplicant
-        fields = ["certificate", "equipment_list"]
+        fields = ["slot", "certificate", "equipment_list"]
 
 
 class VendorPageForm(forms.ModelForm):

@@ -8,7 +8,7 @@ class Vendor(models.Model):
     ]
 
     name = models.CharField(max_length=255)
-    phone_number = models.DecimalField(max_digits=10, decimal_places=0)
+    phone_number = models.CharField(max_length = 10)
     social_media_alias = models.CharField(max_length=255)
     ssm_no = models.CharField(max_length=255)
     product_name = models.CharField(max_length=255)
