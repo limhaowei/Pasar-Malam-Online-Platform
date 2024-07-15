@@ -3,7 +3,8 @@ from . import views
 
 urlpatterns = [
     path("", views.homepage, name="homepage"),
-    path("register/", views.register_vendor, name="register_vendor"),
+    # path("register/", views.register_vendor, name="register_vendor"),
+    path("register/", views.register_user, name="register_user"),
     path("login/", views.login_vendor, name="login"),
     path("logout/", views.logout_vendor, name="logout"),
     path("vendors/", views.vendors_page, name="vendor_list"),
@@ -22,4 +23,9 @@ urlpatterns = [
     ),
     path("dashboard/", views.vendor_dashboard, name="vendor_dashboard"),
     path("edit-vendor-page/", views.edit_vendor_page, name="edit_vendor_page"),
+    path(
+        "mark_notification_as_read/",
+        views.mark_notification_as_read,
+        name="mark_notification_as_read",
+    ),
 ]

@@ -1,5 +1,16 @@
 from django import forms
 from .models import Vendor, MarketApplicant
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
+
+
+class CustomUserCreationForm(UserCreationForm):
+    class Meta:
+        model = User
+        fields = ["first_name", "email", "username", "password1", "password2"]
+        labels = {
+            "first_name": "Name",
+        }
 
 
 class VendorForm(forms.ModelForm):
@@ -9,6 +20,7 @@ class VendorForm(forms.ModelForm):
             "name",
             "phone_number",
             "social_media_alias",
+            "description",
             "ssm_no",
             "product_name",
             "product_type",
@@ -28,5 +40,12 @@ class VendorPageForm(forms.ModelForm):
         model = Vendor
         fields = [
             "name",
+            "phone_number",
             "social_media_alias",
+            "description",
+            "ssm_no",
+            "product_name",
+            "product_type",
+            "product_picture",
+            "menu",
         ]

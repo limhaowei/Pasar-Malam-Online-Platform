@@ -8,18 +8,45 @@ class Vendor(models.Model):
     ]
 
     name = models.CharField(max_length=255)
-    phone_number = models.CharField(max_length = 10)
-    social_media_alias = models.CharField(max_length=255)
-    ssm_no = models.CharField(max_length=255)
-    product_name = models.CharField(max_length=255)
-    product_type = models.CharField(max_length=20, choices=PRODUCT_TYPE_CHOICES)
-    product_picture = models.ImageField(upload_to="product_pictures/")
-    menu = models.FileField(upload_to="menus/")
+    phone_number = models.CharField(max_length=10, blank=True, null=True, default=None)
+    social_media_alias = models.CharField(
+        max_length=255, blank=True, null=True, default=None
+    )
+    ssm_no = models.CharField(max_length=255, blank=True, null=True, default=None)
+    product_name = models.CharField(max_length=255, blank=True, null=True, default=None)
+    product_type = models.CharField(
+        max_length=20,
+        choices=PRODUCT_TYPE_CHOICES,
+        blank=True,
+        null=True,
+        default=None,
+    )
+    product_picture = models.ImageField(
+        upload_to="product_pictures/", blank=True, null=True, default=None
+    )
+    menu = models.FileField(upload_to="menus/", blank=True, null=True, default=None)
 
-    # user = models.OneToOneField('auth.User', on_delete=models.CASCADE)
+    user = models.OneToOneField(
+        "auth.User", on_delete=models.CASCADE, blank=True, null=True, default=None
+    )
 
-    description = models.TextField(blank=True, null=True, default = None)
+    description = models.TextField(blank=True, null=True, default=None)
     # rating = models.DecimalField(max_digits = 1, decimal_places = 1, default=0)
+
+
+class Rating(models.Model):
+    vendor = models.ForeignKey("Vendor", on_delete=models.CASCADE, default=None)
+    rating = models.DecimalField(max_digits=1, decimal_places=1, default=0)
+    comment = models.TextField(blank=True, null=True, default=None)
+
+    def __str__(self):
+        return f"{self.vendor.name} - {self.rating}"
+
+
+class Blog(models.Model):
+    vendor = models.ForeignKey("Vendor", on_delete=models.CASCADE, default=None)
+    title = models.CharField(max_length=255)
+    content = models.TextField(blank=True, null=True, default=None)
 
 
 class Market(models.Model):

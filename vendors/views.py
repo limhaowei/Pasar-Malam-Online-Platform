@@ -5,9 +5,15 @@ from django.core.mail import send_mail
 from django.core.paginator import Paginator
 
 from .models import Vendor, Market, MarketApplicant, Notification
-from .forms import VendorForm, MarketApplicantForm, VendorPageForm
+from .forms import (
+    CustomUserCreationForm,
+    VendorForm,
+    MarketApplicantForm,
+    VendorPageForm,
+)
 from .signals import send_notification_on_approval
-from django.contrib.auth import logout
+from django.contrib.auth import login, authenticate, logout
+from django.contrib.auth.models import User
 
 
 def logout_vendor(request):
@@ -15,21 +21,66 @@ def logout_vendor(request):
     return redirect("homepage")
 
 
-# register-vendor.html / register_vendor.html template
-def register_vendor(request):
-    if request.method == "POST":
-        form = VendorForm(request.POST, request.FILES)
-        if form.is_valid():
-            form.save()
-            return redirect("homepage")
-    else:
-        form = VendorForm()
-    return render(request, "register_vendor.html", {"form": form})
+# # register-vendor.html / register_vendor.html template
+# def register_vendor(request):
+#     if request.method == "POST":
+#         form = VendorForm(request.POST, request.FILES)
+#         if form.is_valid():
+#             form.save()
+#             return redirect("homepage")
+#     else:
+#         form = VendorForm()
+#     return render(request, "register_vendor.html", {"form": form})
 
 
 # login.html
 def login_vendor(request):
+    if request.user.is_authenticated:
+        return redirect("homepage")
+
+    if request.method == "POST":
+        username = request.POST["username"].lower()
+        password = request.POST["password"]
+
+        try:
+            user = User.objects.get(username=username)
+        except:
+            messages.error(request, "Username does not exist")
+
+        user = authenticate(request, username=username, password=password)
+
+        if user is not None:
+            login(request, user)
+            return redirect(
+                request.GET["next"] if "next" in request.GET else "homepage"
+            )
+
+        else:
+            messages.error(request, "Username OR password is incorrect")
+
     return render(request, "login.html")
+
+
+def register_user(request):
+    form = CustomUserCreationForm()
+
+    if request.method == "POST":
+        form = CustomUserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save(commit=False)
+            user.username = user.username.lower()
+            user.save()
+
+            messages.success(request, "User account was created!")
+
+            login(request, user)
+            return redirect("edit_vendor_page")
+
+        else:
+            messages.success(request, "An error has occurred during registration")
+
+    context = {"form": form}
+    return render(request, "register.html", context)
 
 
 # index.html

@@ -823,6 +823,8 @@ input[type="text"],
 input[type="file"],
 input[type="number"],
 input[type="password"],
+input[type="email"],
+textarea,
 select {
   background: #f0f0f0;
   border: none;
@@ -1297,4 +1299,8 @@ li {
   font-size: 20px;
   font-weight: bold;
   color: #212124;
+}
+
+.image-preview {
+  max-width: 80%;
 }

@@ -28,40 +28,57 @@
   </head>
 
   <body class="login">
-      <div class="login-box">
-        <img src="{% static 'vendors/images/logo.jpg' %}" alt="Login Image" class="login-image" />
-        <!-- <form action="/login" method="post"> -->
-          <div class="input-group">
-            <input type="text" id="email" name="email" class="input" required />
-            <label class="label">Email</label>
-          </div>
-          <div class="input-group">
-            <input
-              type="password"
-              id="password"
-              name="password"
-              class="input"
-              required
-            />
-            <label class="label">Password</label>
-          </div>
-          <label>
-            <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> Remember me
-          </label>
+    <div class="login-box">
+      <img
+        src="{% static 'vendors/images/logo.jpg' %}"
+        alt="Login Image"
+        class="login-image"
+      />
+      <form action="" method="POST">
+        {% csrf_token %}
+        <div class="input-group">
+          <input
+            type="text"
+            id="username"
+            name="username"
+            class="input"
+            required
+          />
+          <label class="label">Username</label>
+        </div>
+        <div class="input-group">
+          <input
+            type="password"
+            id="password"
+            name="password"
+            class="input"
+            required
+          />
+          <label class="label">Password</label>
+        </div>
+        <label>
+          <input
+            type="checkbox"
+            checked="checked"
+            name="remember"
+            style="margin-bottom: 15px"
+          />
+          Remember me
+        </label>
 
-          <div class="login-type">
-            <a href="{% url 'homepage' %}">
-              <button type="submit" name="login-type" value="normal">
-                Login
-              </button>
-            </a>
-            <!-- <a href="index.html">
-              <button type="submit" name="login-type" value="vendor">
-                Vendor Login
-              </button> -->
-            </a>
-          </div>
-        </form>
-      </div>
+        <div class="login-type">
+          <a href="{% url 'homepage' %}">
+            <button type="submit" name="login-type" value="normal">
+              Login
+            </button>
+          </a>
+        </div>
+        <hr />
+        <div>
+          <p>Don’t have an Account?</p>
+          <a href="{% url 'register_user' %}">Sign Up</a>
+        </div>
+      </form>
+    </div>
   </body>
-  </html>
+</html>

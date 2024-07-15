@@ -32,7 +32,7 @@
       <div class="col-md-10">
         <div class="vendor-wrap d-flex">
           <div class="vendor-image col-md-5">
-            {% if selected_vendor %}
+            {% if selected_vendor.product_picture %}
             <img
               alt="Product Picture"
               class="img-fluid"
@@ -132,7 +132,7 @@
     <div class="row justify-content-center">
       <div class="col-md-4">
         <div class="vendor-btn-wrap">
-          <a class="btn btn-danger" href="{% url 'register_vendor' %}"
+          <a class="btn btn-danger" href="{% url 'register_user' %}"
             ><span class="ti-plus"></span> Register</a
           >
         </div>
