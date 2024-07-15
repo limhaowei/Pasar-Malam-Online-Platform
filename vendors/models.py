@@ -18,7 +18,7 @@ class Vendor(models.Model):
 
     # user = models.OneToOneField('auth.User', on_delete=models.CASCADE)
 
-    # description = models.TextField(blank=True, null=True, default = None)
+    description = models.TextField(blank=True, null=True, default = None)
     # rating = models.DecimalField(max_digits = 1, decimal_places = 1, default=0)
 
 
