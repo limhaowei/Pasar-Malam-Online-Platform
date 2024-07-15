@@ -1,8 +1,8 @@
 {% extends 'main.html' %} {% load static %} {% block content %}
-<section class="light-bg company-details_wrap">
+<section class="light-bg company-details_wrap" id="manage">
   <div class="container">
     <div class="row justify-content-center">
-      <div class="col-md-10 responsive-wrap">
+      <div class="col-md-5 responsive-wrap">
         <div class="register-wrap">
           <div class="register">
             <h5>Create Market</h5>
@@ -20,7 +20,6 @@
                 <label for="date formInput">Date:</label>
                 <input type="date" id="date" name="date" /><br /><br />
               </div>
-              <br />
 
               <div class="button-section">
                 <br />
@@ -32,10 +31,17 @@
             </form>
           </div>
         </div>
+      </div>
 
-        <div class="register-wrap mt-4">
-          <h5>Existing Markets:</h5>
-          <ul>
+      <div class="col-md-5 responsive-wrap">
+        <div class="register-wrap">
+          <div class="register">
+            <h5>Existing Markets</h5>
+          </div>
+        </div>
+        <div class="register-wrap register mt-4">
+          <div>
+            <ul>
             {% for market in markets %}
             <li>
               <a href="{% url 'market_applicants' market.id %}"
@@ -43,10 +49,10 @@
               >
             </li>
             {% empty %}
-            <li>No markets created yet.</li>
+            <p>No markets created yet.</p>
             {% endfor %}
           </ul>
-        </div>
+        
       </div>
     </div>
   </div>

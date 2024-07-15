@@ -9,7 +9,6 @@ urlpatterns = [
     path("vendor/<pk>/", views.vendor_detail, name="vendor_detail"),
     path("login/", views.login, name="login"),
     path("user-guide/", views.user_guide, name="user_guide"),
-    # path("apply-slot/", views.apply_slot, name="apply_slot"),
     path("blog/", views.blog, name="blog"),
     path("manage/", views.manage, name="manage"),
     path(

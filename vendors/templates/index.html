@@ -47,9 +47,13 @@
             {% endif %}
           </div>
           <div class="vendor-info col-md-6">
-            <a href="{% url 'vendor_detail' selected_vendor.pk %}"
-              ><h6>{{selected_vendor.name | default:"Coming Soon..."}}</h6></a
+            {% if selected_vendor %}
+            <a href="{% url 'vendor_detail' selected_vendor.pk%}"
+              ><h6>{{selected_vendor.name}}</h6></a
             >
+            {% else %}
+            <a href=""><h6>Coming Soon...</h6></a>
+            {% endif %}
             <hr />
             <p>{{blog_title}}</p>
             <p>{{blog_content | slice:"100"}}</p>
