@@ -48,6 +48,39 @@
                       >User Guide</a
                     >
                   </li>
+                  {% if user.is_authenticated and user.is_superuser %}
+                  <!-- Manage Market -->
+                  <li class="nav-item">
+                    <a class="nav-link" href="{% url 'manage' %}"
+                      >Manage Market</a
+                    >
+                  </li>
+                  <li class="nav-item">
+                    <a
+                      class="btn btn-outline-light top-btn"
+                      href="{% url 'logout' %}"
+                      >Log Out</a
+                    >
+                  </li>
+                  {% elif request.user.is_authenticated %}
+                  <li class="nav-item">
+                    <a class="nav-link" href="{% url 'vendor_dashboard' %}"
+                      >Dashboard</a
+                    >
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="{% url 'edit_vendor_page' %}"
+                      >Edit Profile</a
+                    >
+                  </li>
+                  <li class="nav-item">
+                    <a
+                      class="btn btn-outline-light top-btn"
+                      href="{% url 'logout' %}"
+                      >Log Out</a
+                    >
+                  </li>
+                  {% else %}
                   <li class="nav-item">
                     <a
                       class="btn btn-outline-light top-btn"
@@ -62,6 +95,7 @@
                       ><span class="ti-plus"></span> Register</a
                     >
                   </li>
+                  {% endif %}
                 </ul>
               </div>
             </nav>

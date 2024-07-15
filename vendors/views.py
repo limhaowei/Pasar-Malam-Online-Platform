@@ -7,6 +7,12 @@ from django.core.paginator import Paginator
 from .models import Vendor, Market, MarketApplicant, Notification
 from .forms import VendorForm, MarketApplicantForm, VendorPageForm
 from .signals import send_notification_on_approval
+from django.contrib.auth import logout
+
+
+def logout_vendor(request):
+    logout(request)
+    return redirect("homepage")
 
 
 # register-vendor.html / register_vendor.html template
@@ -22,7 +28,7 @@ def register_vendor(request):
 
 
 # login.html
-def login(request):
+def login_vendor(request):
     return render(request, "login.html")
 
 
@@ -98,7 +104,7 @@ def blog(request):
 
 
 # admin actions
-@login_required
+@login_required(login_url="login")
 def apply_market_view(request, market_id):
     market = get_object_or_404(Market, pk=market_id)
     if request.method == "POST":
@@ -115,7 +121,7 @@ def apply_market_view(request, market_id):
     return render(request, "apply_market.html", {"form": form, "market": market})
 
 
-@login_required
+@login_required(login_url="login")
 @permission_required("is_superuser")
 def manage(request):
     if request.method == "POST":
@@ -128,7 +134,7 @@ def manage(request):
     return render(request, "manage.html", {"markets": markets})
 
 
-@login_required
+@login_required(login_url="login")
 @permission_required("is_superuser")
 def market_applicants(request, market_id):
     market = get_object_or_404(Market, pk=market_id)
@@ -138,7 +144,7 @@ def market_applicants(request, market_id):
     )
 
 
-@login_required
+@login_required(login_url="login")
 @permission_required("is_superuser")
 def approve_application(request, pk):
     market_applicant = MarketApplicant.objects.get(pk=pk)
@@ -151,7 +157,7 @@ def approve_application(request, pk):
     return redirect("market_applicants_list")
 
 
-@login_required
+@login_required(login_url="login")
 def edit_vendor_page(request):
     vendor = request.user.vendor
     if request.method == "POST":
@@ -164,13 +170,13 @@ def edit_vendor_page(request):
     return render(request, "edit_vendor_page.html", {"form": form})
 
 
-@login_required
+@login_required(login_url="login")
 def vendor_dashboard(request):
     vendor = request.user.vendor
     return render(request, "vendor_dashboard.html", {"vendor": vendor})
 
 
-@login_required
+@login_required(login_url="login")
 def mark_notification_as_read(request):
     notification_id = request.POST.get("notification_id")
     notification = Notification.objects.get(id=notification_id)

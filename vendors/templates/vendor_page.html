@@ -31,7 +31,7 @@
           <hr />
           <div class="register">
             {% if vendor.product_picture %}
-            <img src="{{ vendor.product_picture }}" alt="product picture" />
+            <img src="{{ vendor.product_picture.url }}" alt="product picture" />
             {% else %}
             <p>Product images coming soon!</p>
             {% endif %}
