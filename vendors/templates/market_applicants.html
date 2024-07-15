@@ -1,0 +1,42 @@
+{% extends 'main.html' %} {% load static %} {% block content %}
+<section class="light-bg company-details_wrap">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-10 responsive-wrap">
+        <div class="register-wrap">
+          <div class="register">
+            <h5>Applicants for {{ market.date }} Market</h5>
+          </div>
+        </div>
+        <div class="register-wrap mt-4">
+          <div class="register form">
+            <table>
+              <tr>
+                <th>Vendor Name</th>
+                <th>Slot Type</th>
+                <th>Certificate</th>
+                <th>Equipment List</th>
+                <!-- Add more columns as needed -->
+              </tr>
+              {% for applicant in applicants %}
+              <tr>
+                <td>{{ applicant.vendor.name }}</td>
+                <td>{{ applicant.slot }}</td>
+                <td>{{ applicant.certificate }}</td>
+                <td>{{ applicant.equipment_list }}</td>
+                <!-- Add more columns as needed -->
+              </tr>
+              {% empty %}
+              <tr>
+                <td colspan="4">No applicants for this market yet.</td>
+              </tr>
+              {% endfor %}
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

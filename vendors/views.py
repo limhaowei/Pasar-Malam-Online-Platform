@@ -1,8 +1,12 @@
-from django.shortcuts import render, redirect, get_object_or_404
-
-from .models import Vendor
-from .forms import VendorForm
+from django.shortcuts import render, redirect, get_object_or_404, HttpResponse
+from django.contrib.auth.decorators import login_required, permission_required
+from django.contrib import messages
+from django.core.mail import send_mail
 from django.core.paginator import Paginator
+
+from .models import Vendor, Market, MarketApplicant, Notification
+from .forms import VendorForm, MarketApplicantForm, VendorPageForm
+from .signals import send_notification_on_approval
 
 
 # register-vendor.html / register_vendor.html template
@@ -73,13 +77,13 @@ def user_guide(request):
     return render(request, "user_guide.html")
 
 
-# apply_slot.html
-def apply_slot(request):
-    context = {
-        "month": "July",
-        "year": "2024",
-    }
-    return render(request, "apply_slot.html", context)
+# # apply_slot.html
+# def apply_slot(request):
+#     context = {
+#         "month": "July",
+#         "year": "2024",
+#     }
+#     return render(request, "apply_slot.html", context)
 
 
 # vendor of the week
@@ -91,3 +95,85 @@ def blog(request):
         "content": "This is the content of the blog",
     }
     return render(request, "blog.html", context)
+
+
+# admin actions
+@login_required
+def apply_market_view(request, market_id):
+    market = get_object_or_404(Market, pk=market_id)
+    if request.method == "POST":
+        form = MarketApplicantForm(request.POST)
+        if form.is_valid():
+            application = form.save(commit=False)
+            application.vendor = request.user.vendor
+            application.market = market
+            application.save()
+            messages.success(request, "Application submitted successfully!")
+            return redirect("vendor_dashboard")
+    else:
+        form = MarketApplicantForm()
+    return render(request, "apply_market.html", {"form": form, "market": market})
+
+
+@login_required
+@permission_required("is_superuser")
+def manage(request):
+    if request.method == "POST":
+        date = request.POST.get("date")
+        if date:
+            market = Market.objects.create(date=date)
+            messages.success(request, "New market created successfully!")
+            return redirect("manage")
+    markets = Market.objects.all()
+    return render(request, "manage.html", {"markets": markets})
+
+
+@login_required
+@permission_required("is_superuser")
+def market_applicants(request, market_id):
+    market = get_object_or_404(Market, pk=market_id)
+    applicants = MarketApplicant.objects.filter(market=market)
+    return render(
+        request, "market_applicants.html", {"market": market, "applicants": applicants}
+    )
+
+
+@login_required
+@permission_required("is_superuser")
+def approve_application(request, pk):
+    market_applicant = MarketApplicant.objects.get(pk=pk)
+    market_applicant.approved = True
+    market_applicant.save()
+
+    # Send notification using signal
+    send_notification_on_approval(sender=None, market_applicant=market_applicant)
+
+    return redirect("market_applicants_list")
+
+
+@login_required
+def edit_vendor_page(request):
+    vendor = request.user.vendor
+    if request.method == "POST":
+        form = VendorPageForm(request.POST, instance=vendor)
+        if form.is_valid():
+            form.save()
+            return redirect("vendor_dashboard")
+    else:
+        form = VendorPageForm(instance=vendor)
+    return render(request, "edit_vendor_page.html", {"form": form})
+
+
+@login_required
+def vendor_dashboard(request):
+    vendor = request.user.vendor
+    return render(request, "vendor_dashboard.html", {"vendor": vendor})
+
+
+@login_required
+def mark_notification_as_read(request):
+    notification_id = request.POST.get("notification_id")
+    notification = Notification.objects.get(id=notification_id)
+    notification.read = True
+    notification.save()
+    return HttpResponse("Notification marked as read")

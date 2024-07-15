@@ -36,7 +36,7 @@
             <img
               alt="Product Picture"
               class="img-fluid"
-              src="{{selected_vendor.product_picture.url }}"
+              src="{{ selected_vendor.product_picture.url }}"
             />
             {% else %}
             <img
@@ -47,7 +47,7 @@
             {% endif %}
           </div>
           <div class="vendor-info col-md-6">
-            <a href=""
+            <a href="{% url 'vendor_detail' selected_vendor.pk %}"
               ><h6>{{selected_vendor.name | default:"Coming Soon..."}}</h6></a
             >
             <hr />

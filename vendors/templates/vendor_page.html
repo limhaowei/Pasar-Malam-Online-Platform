@@ -23,7 +23,7 @@
           <h5>Promotion / Brief / Description</h5>
           <hr />
           <div class="register">
-            <p>{{ vendor.promotion |default:"Coming soon!" }}</p>
+            <p>{{ vendor.description |default:"Coming soon!" }}</p>
           </div>
         </div>
         <div class="register-wrap mt-4">
@@ -45,7 +45,7 @@
 
             {% if vendor.menu %}
             <a
-              href="{{ vendor.menu }}"
+              href="{{ vendor.menu.url }}"
               alt="product menu"
               class="btn btn-outline-dark"
               download
