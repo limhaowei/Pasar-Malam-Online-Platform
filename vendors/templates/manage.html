@@ -45,7 +45,7 @@
             {% for market in markets %}
             <li>
               <a href="{% url 'market_applicants' market.id %}"
-                >{{ market.date }} Market</a
+                >{{ market.date|date:"jS F Y" }} Market</a
               >
             </li>
             {% empty %}
