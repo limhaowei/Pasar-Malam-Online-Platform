@@ -466,6 +466,29 @@ ol {
   color: #737882;
 }
 
+.register-wrap ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.register-wrap ul li {
+  margin-bottom: 10px;
+}
+
+.register-wrap ul li a {
+  display: block;
+  padding: 10px;
+  border-radius: 5px;
+  text-decoration: none;
+  background: #212124;
+  color: #fff;
+  font-weight: 500;
+  transition: background-color 0.3s ease;
+}
+
+.register-wrap ul li a:hover {
+  background-color: #737882;
+}
 /* Footer */
 footer {
   position: relative;
