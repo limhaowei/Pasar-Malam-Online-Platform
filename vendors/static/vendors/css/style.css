@@ -1043,7 +1043,7 @@ input:valid {
 }
 .register-link p a:hover{
   text-decoration: underline;
-  color: yellow;
+  color: #e6ba2b;
 }
 
 /* Vendor of the Week */
