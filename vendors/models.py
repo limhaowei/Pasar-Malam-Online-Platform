@@ -1,3 +1,4 @@
+from django.db.models import Avg
 from django.db import models
 
 
@@ -39,10 +40,18 @@ class Vendor(models.Model):
     def __str__(self):
         return f"{self.name}"
 
+    def average_rating(self):
+        average_rating = self.rating_set.aggregate(avg_rating=Avg("rating"))[
+            "avg_rating"
+        ]
+        if average_rating is not None:
+            return round(average_rating * 20, 1)
+        return 0
+
 
 class Rating(models.Model):
     vendor = models.ForeignKey("Vendor", on_delete=models.CASCADE, default=None)
-    rating = models.DecimalField(max_digits=1, decimal_places=1, default=0)
+    rating = models.DecimalField(max_digits=1, decimal_places=0, default=0)
     comment = models.TextField(blank=True, null=True, default=None)
 
     def __str__(self):

@@ -17,6 +17,8 @@
                 <th>Certificate</th>
                 <th>Equipment List</th>
                 <th>Profile</th>
+                <th>Payment Proof</th>
+                <th>Booth Number</th>
                 <!-- Add more columns as needed -->
               </tr>
               {% for applicant in applicants %}
@@ -38,8 +40,14 @@
                     >View</a
                   >
                 </td>
+                <td>
+                  <a href="{{ applicant.proof_of_payment.url }}" target="_blank"
+                    >View</a
+                  >
+                </td>
+                <td>{{ applicant.booth_no }}</td>
+
                 <td>{% if applicant.approved %} Approved</td>
-                <td><a>Send Payment Request</a></td>
                 <td><a>Allocate Booth</a></td>
                 {% else %}
                 <td>Pending</td>

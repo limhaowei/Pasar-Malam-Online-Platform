@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Vendor, Market, MarketApplicant
+from .models import Vendor, Market, MarketApplicant, Rating, Blog
 
 # Register your models here.
 
@@ -34,6 +34,16 @@ class MarketApplicantAdmin(admin.ModelAdmin):
     )
 
 
+class RatingAdmin(admin.ModelAdmin):
+    list_display = ("vendor", "rating", "comment")
+
+
+class BlogAdmin(admin.ModelAdmin):
+    list_display = ("vendor", "title", "content")
+
+
 admin.site.register(Vendor, VendorAdmin)
 admin.site.register(Market, MarketAdmin)
 admin.site.register(MarketApplicant, MarketApplicantAdmin)
+admin.site.register(Rating, RatingAdmin)
+admin.site.register(Blog, BlogAdmin)

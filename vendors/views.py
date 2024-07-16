@@ -5,10 +5,9 @@ from django.contrib import messages
 from django.core.mail import send_mail
 from django.core.paginator import Paginator
 
-from .models import Vendor, Market, MarketApplicant, Notification
+from .models import Vendor, Market, MarketApplicant, Notification, Rating, Blog
 from .forms import (
     CustomUserCreationForm,
-    VendorForm,
     MarketApplicantForm,
     VendorPageForm,
 )
@@ -257,3 +256,20 @@ def upload_payment_page(request, pk):
     else:
         form = VendorPageForm(instance=vendor)
     return render(request, "payment_proof.html")
+
+
+def rate_vendor(request, pk):
+    vendor = get_object_or_404(Vendor, pk=pk)
+
+    if request.method == "POST":
+        rate = (
+            int(request.POST.get("rate1", 0))
+            + int(request.POST.get("rate2", 0))
+            + int(request.POST.get("rate3", 0))
+            + int(request.POST.get("rate4", 0))
+            + int(request.POST.get("rate5", 0))
+        )
+        comment = request.POST.get("comment", "")
+        rating = Rating.objects.create(vendor=vendor, rating=rate, comment=comment)
+
+    return redirect("homepage")

@@ -1,4 +1,3 @@
-<!-- registration/templates/vendor_list.html -->
 {% extends 'main.html' %} {% load static %} {% block content %}
 <script
   src="https://cdnjs.cloudflare.com/ajax/libs/htmx/2.0.1/htmx.min.js"
@@ -37,20 +36,14 @@
               <div class="vendor-title-box">
                 <h6>{{vendor.name}}</h6>
                 <div class="rating">
-                  {% if vendor.rating %}
-                  <div class="star-rating" title="{{vendor.rating}}%">
+                  <div class="star-rating" title="{{ vendor.average_rating }}">
                     <div class="back-stars">
                       <i class="fa fa-star" aria-hidden="true"></i>
                       <i class="fa fa-star" aria-hidden="true"></i>
                       <i class="fa fa-star" aria-hidden="true"></i>
                       <i class="fa fa-star" aria-hidden="true"></i>
                       <i class="fa fa-star" aria-hidden="true"></i>
-
-                      <!-- not sure how to render the rating  -->
-                      <div
-                        class="front-stars"
-                        style="width: 0%"
-                      >
+                      <div class="front-stars" style="width: {{ vendor.average_rating }}%">
                         <i class="fa fa-star" aria-hidden="true"></i>
                         <i class="fa fa-star" aria-hidden="true"></i>
                         <i class="fa fa-star" aria-hidden="true"></i>
@@ -59,34 +52,15 @@
                       </div>
                     </div>
                   </div>
-                  {% else %}
-                  <div class="star-rating" title="0%">
-                    <div class="back-stars">
-                      <i class="fa fa-star" aria-hidden="true"></i>
-                      <i class="fa fa-star" aria-hidden="true"></i>
-                      <i class="fa fa-star" aria-hidden="true"></i>
-                      <i class="fa fa-star" aria-hidden="true"></i>
-                      <i class="fa fa-star" aria-hidden="true"></i>
-
-                      <div class="front-stars" style="width: 0%">
-                        <i class="fa fa-star" aria-hidden="true"></i>
-                        <i class="fa fa-star" aria-hidden="true"></i>
-                        <i class="fa fa-star" aria-hidden="true"></i>
-                        <i class="fa fa-star" aria-hidden="true"></i>
-                        <i class="fa fa-star" aria-hidden="true"></i>
-                      </div>
-                    </div>
-                    {% endif %}
-                    <a
-                      href="#"
-                      class="btn btn-outline-light rate-btn"
-                      data-bs-toggle="modal"
-                      data-bs-target="#rateModal"
-                    >
-                      Rate
-                    </a>
+                  <a 
+                    href="#" 
+                    class="btn btn-outline-light rate-btn" 
+                    data-bs-toggle="modal" 
+                    data-bs-target="#rateModal" 
+                    data-vendor-id="{{ vendor.pk }}">
+                    Rate
+                  </a>
                   </div>
-                </div>
 
                 <p>{{vendor.product_type}}</p>
                 <ul class="address">
@@ -144,39 +118,51 @@
         ></button>
       </div>
       <div class="modal-body">
-        <form id="rateForm">
+        <form id="rateForm" method="POST">
+          {% csrf_token %}
           <div class="star-widget">
-            <input type="radio" name="rate" id="rate1" />
-            <label for="rate1" class="fa fa-star"></label>
-            <input type="radio" name="rate" id="rate2" />
-            <label for="rate2" class="fa fa-star"></label>
-            <input type="radio" name="rate" id="rate3" />
-            <label for="rate3" class="fa fa-star"></label>
-            <input type="radio" name="rate" id="rate4" />
-            <label for="rate4" class="fa fa-star"></label>
-            <input type="radio" name="rate" id="rate5" />
+            <input type="radio" name="rate5" id="rate5" value="5" />
             <label for="rate5" class="fa fa-star"></label>
+            <input type="radio" name="rate4" id="rate4" value="4" />
+            <label for="rate4" class="fa fa-star"></label>
+            <input type="radio" name="rate3" id="rate3" value="3" />
+            <label for="rate3" class="fa fa-star"></label>
+            <input type="radio" name="rate2" id="rate2" value="2" />
+            <label for="rate2" class="fa fa-star"></label>
+            <input type="radio" name="rate1" id="rate1" value="1" />
+            <label for="rate1" class="fa fa-star"></label>
             <div class="textarea">
               <textarea
                 id="feedbackTextarea"
                 cols="55"
                 rows="5"
+                name="comment"
                 placeholder="Describe your experience..."
               ></textarea>
             </div>
             <div class="text-center mt-3">
-              <button type="submit" class="btn btn-primary" id="clear">
-                Submit
-              </button>
+              <button type="submit" class="btn btn-primary" id="clear">Submit</button>
             </div>
           </div>
         </form>
+
       </div>
     </div>
   </div>
 </div>
 
 <script>
+  document.addEventListener('DOMContentLoaded', function () {
+    var rateModal = document.getElementById('rateModal');
+    rateModal.addEventListener('show.bs.modal', function (event) {
+      var button = event.relatedTarget; 
+      var vendorId = button.getAttribute('data-vendor-id');
+      
+      var form = rateModal.querySelector('#rateForm');
+      form.action = '/rate_vendor/' + vendorId + '/';
+    });
+  });
+
   function resetForm() {
     document.getElementById("rateForm").reset();
   }

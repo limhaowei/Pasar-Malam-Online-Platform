@@ -38,4 +38,5 @@ urlpatterns = [
         views.upload_payment_page,
         name="upload_payment",
     ),
+    path("rate_vendor/<int:pk>/", views.rate_vendor, name="rate_vendor"),
 ]

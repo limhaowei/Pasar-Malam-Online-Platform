@@ -1,5 +1,5 @@
 from django import forms
-from .models import Vendor, MarketApplicant
+from .models import Vendor, MarketApplicant, Blog
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
@@ -49,3 +49,9 @@ class VendorPageForm(forms.ModelForm):
             "product_picture",
             "menu",
         ]
+
+
+class BlogForm(forms.ModelForm):
+    class Meta:
+        model = Blog
+        fields = ["title", "content"]
