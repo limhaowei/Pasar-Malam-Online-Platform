@@ -916,6 +916,20 @@ select {
   overflow: hidden;
 }
 
+.login-link {
+  font-size: 12.5px;
+  text-align: center;
+}
+.login-link p a{
+  color: black;
+  text-decoration: none;
+  font-weight: 600;
+}
+.login-link p a:hover{
+  text-decoration: underline;
+  color: #e6ba2b;
+}
+
 /* Body styles */
 .login {
   /* background-color: #f0f0f0; */
