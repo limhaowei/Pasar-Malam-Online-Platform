@@ -14,7 +14,6 @@
               <tr>
                 <th>Name</th>
                 <th>SSM Number</th>
-                <th>Certificate</th>
                 <th>Profile</th>
                 <th>Average Rating</th>
                 <!-- Add more columns as needed -->
@@ -23,11 +22,6 @@
               <tr>
                 <td>{{ vendor.name }}</td>
                 <td>{{ vendor.ssm_no }}</td>
-                <td>
-                  <a href="{{ vendor.certificate.url }}" target="_blank"
-                    >View</a
-                  >
-                </td>
                 <td>
                   <a href="{% url 'vendor_detail' vendor.pk %}">View</a>
                 </td>

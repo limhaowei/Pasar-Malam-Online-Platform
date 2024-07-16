@@ -35,6 +35,12 @@ class MarketApplicantForm(forms.ModelForm):
         fields = ["slot", "certificate", "equipment_list"]
 
 
+class UploadPaymentForm(forms.ModelForm):
+    class Meta:
+        model = MarketApplicant
+        fields = ["proof_of_payment"]
+
+
 class VendorPageForm(forms.ModelForm):
     class Meta:
         model = Vendor
@@ -49,6 +55,9 @@ class VendorPageForm(forms.ModelForm):
             "product_picture",
             "menu",
         ]
+        labels = {
+            "ssm_no": "SSM Number",
+        }
 
 
 class BlogForm(forms.ModelForm):

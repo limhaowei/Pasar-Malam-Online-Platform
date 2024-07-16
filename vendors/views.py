@@ -6,7 +6,13 @@ from django.core.mail import send_mail
 from django.core.paginator import Paginator
 
 from .models import Vendor, Market, MarketApplicant, Notification, Rating, Blog
-from .forms import CustomUserCreationForm, MarketApplicantForm, VendorPageForm, BlogForm
+from .forms import (
+    CustomUserCreationForm,
+    MarketApplicantForm,
+    VendorPageForm,
+    BlogForm,
+    UploadPaymentForm,
+)
 from .signals import send_notification_on_approval
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.models import User
@@ -202,17 +208,19 @@ def mark_notification_as_read(request):
     return HttpResponse("Notification marked as read")
 
 
-# upload payment proof
 @login_required(login_url="login")
 def upload_payment_page(request, pk):
-    vendor = request.user.vendor
-    if request.method == "POST":
-        market_applicant = MarketApplicant.objects.get(pk=pk)
-        market_applicant.proof_of_payment = request.POST["proof_of_payment"]
-        market_applicant.save()
-        return redirect("vendor_dashboard")
+    market_applicant = MarketApplicant.objects.get(pk=pk)
 
-    return render(request, "payment_proof.html")
+    if request.method == "POST":
+        form = UploadPaymentForm(request.POST, request.FILES, instance=market_applicant)
+        if form.is_valid():
+            form.save()
+            return redirect("vendor_dashboard")
+    else:
+        form = UploadPaymentForm(instance=market_applicant)
+
+    return render(request, "payment_proof.html", {"form": form})
 
 
 # Admin-Specific Operations

@@ -10,20 +10,13 @@
         </div>
         <div class="register-wrap mt-4">
           <div class="register form">
-            <form method="POST">
-              {% csrf_token %}
+            <form method="POST" enctype="multipart/form-data">
+              {% csrf_token %} {% for field in form %}
               <div class="form-section">
-                <label for="formInput">Upload Payment Proof</label
-                ><input
-                  type="file"
-                  id="proof_of_payment"
-                  name="proof_of_payment"
-                  upload="proof_of_payment"
-                  required
-                />
+                <label for="formInput">{{ field.label }}</label>
+                {{ field }}
               </div>
-              <br />
-
+              {% endfor %}
               <div class="button-section">
                 <br />
                 <button class="btn btn-danger" type="submit">Submit</button>
