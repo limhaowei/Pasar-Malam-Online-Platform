@@ -1039,6 +1039,19 @@ input:valid {
   opacity: 0.8;
 }
 
+.register-link {
+  font-size: 14.5px;
+  text-align: center;
+}
+.register-link p a{
+  color: black;
+  text-decoration: none;
+  font-weight: 600;
+}
+.register-link p a:hover{
+  text-decoration: underline;
+}
+
 /* Vendor of the Week */
 #vendor-of-the-week .styled-heading {
   text-align: center;
