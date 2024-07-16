@@ -263,7 +263,7 @@ def manage(request):
     if past_market:
         market_applicants = MarketApplicant.objects.filter(market__in=past_market)
         print(market_applicants)
-        market.delete()
+        past_market.delete()
 
     if request.method == "POST":
         date = request.POST.get("date")
