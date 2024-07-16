@@ -16,17 +16,38 @@
                 <th>Slot Type</th>
                 <th>Certificate</th>
                 <th>Equipment List</th>
+                <th>Profile</th>
+                <th>Status</th>
                 <!-- Add more columns as needed -->
               </tr>
               {% for applicant in applicants %}
               <tr>
                 <td>{{ applicant.vendor.name }}</td>
                 <td>{{ applicant.slot }}</td>
-                <td>{{ applicant.certificate }}</td>
-                <td>{{ applicant.equipment_list }}</td>
+                <td>
+                  <a href="{{ applicant.certificate.url }}" target="_blank"
+                    >View</a
+                  >
+                </td>
+                <td>
+                  <a href="{{ applicant.equipment_list.url }}" target="_blank"
+                    >View</a
+                  >
+                </td>
+                <td>
+                  <a href="{% url 'vendor_detail' applicant.vendor.pk %}"
+                    >View</a
+                  >
+                </td>
+                <td>{% if applicant.approved %} Approved {% else %} Pending</td>
+                <td>
+                  <a href="{% url 'approve_application' applicant.pk %}"
+                    >Approve</a
+                  >
+                </td>
                 <!-- Add more columns as needed -->
               </tr>
-              {% empty %}
+              {% endif %} {% empty %}
               <tr>
                 <td colspan="4">No applicants for this market yet.</td>
               </tr>

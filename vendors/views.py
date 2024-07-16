@@ -1,3 +1,4 @@
+import datetime
 from django.shortcuts import render, redirect, get_object_or_404, HttpResponse
 from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib import messages
@@ -159,7 +160,7 @@ def blog(request):
 def apply_market_view(request, market_id):
     market = get_object_or_404(Market, pk=market_id)
     if request.method == "POST":
-        form = MarketApplicantForm(request.POST)
+        form = MarketApplicantForm(request.POST, request.FILES)
         if form.is_valid():
             application = form.save(commit=False)
             application.vendor = request.user.vendor
@@ -181,7 +182,8 @@ def manage(request):
             market = Market.objects.create(date=date)
             messages.success(request, "New market created successfully!")
             return redirect("manage")
-    markets = Market.objects.all()
+    markets = Market.objects.all().order_by("date")
+    # markets = Market.objects.filter(date__gt=datetime.date.today()).order_by("date")
     return render(request, "manage.html", {"markets": markets})
 
 
@@ -205,7 +207,7 @@ def approve_application(request, pk):
     # Send notification using signal
     send_notification_on_approval(sender=None, market_applicant=market_applicant)
 
-    return redirect("market_applicants_list")
+    return redirect("market_applicants", market_id=market_applicant.market.id)
 
 
 @login_required(login_url="login")
@@ -224,7 +226,9 @@ def edit_vendor_page(request):
 @login_required(login_url="login")
 def vendor_dashboard(request):
     vendor = request.user.vendor
-    return render(request, "vendor_dashboard.html", {"vendor": vendor})
+    markets = Market.objects.filter(date__gt=datetime.date.today()).order_by("date")
+    context = {"vendor": vendor, "markets": markets}
+    return render(request, "vendor_dashboard.html", context)
 
 
 @login_required(login_url="login")

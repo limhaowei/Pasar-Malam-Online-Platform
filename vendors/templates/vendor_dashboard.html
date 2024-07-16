@@ -3,9 +3,12 @@
 <section class="light-bg company-details_wrap" id="dashboard">
   <div class="container">
     <div class="row justify-content-center">
-      <div class="col-md-10 responsive-wrap">
+      <!-- Notifications -->
+      <div class="col-md-5 responsive-wrap">
         <div class="register-wrap">
-          <h5>Notifications</h5>
+          <div class="register">
+            <h5>Notifications</h5>
+          </div>
         </div>
         <div class="register-wrap mt-4">
           <div class="register">
@@ -29,6 +32,31 @@
                 >Edit Your Vendor Profile</a
               >
             </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Apply Slot for Market -->
+      <div class="col-md-5 responsive-wrap">
+        <div class="register-wrap">
+          <div class="register">
+            <h5>Upcoming Market(s)</h5>
+          </div>
+        </div>
+        <div class="register-wrap mt-4">
+          <div class="register">
+            <ul>
+              {% for market in markets %}
+              <li>
+                {{ market.date }} :
+                <a href="{% url 'apply_market' market.id %}"
+                  >Apply for a Slot
+                </a>
+              </li>
+              {% empty %}
+              <li>No Upcoming Market</li>
+              {% endfor %}
+            </ul>
           </div>
         </div>
       </div>

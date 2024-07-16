@@ -210,9 +210,18 @@
                   items will be confiscated.
                 </p>
 
-                {{ form.as_p }}
+                {% for field in form %}
+                <div class="form-section">
+                  <label for="formInput">{{field.label}}</label>
+                  {{field}}
+                </div>
+                {% endfor %}
 
                  <br />
+                {% for error in field.errors %}
+                <p style="color: red">{{error}}</p>
+                {% endfor %}
+
                  <hr />
                 <div class="form-section">
                   <br />
@@ -223,9 +232,9 @@
                 </div>
 
                 <div class="button-section">
-                  <br />
-                  <input class="btn btn-danger" type="submit" value="Apply to Market" />
-                </div>
+                <br />
+                <button class="btn btn-danger" type="submit">Apply to Market</button>
+              </div>
               <br />
             </form>
           </div>

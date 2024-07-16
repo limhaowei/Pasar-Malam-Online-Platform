@@ -21,6 +21,11 @@ urlpatterns = [
         views.market_applicants,
         name="market_applicants",
     ),
+    path(
+        "approve_application/<pk>/",
+        views.approve_application,
+        name="approve_application",
+    ),
     path("dashboard/", views.vendor_dashboard, name="vendor_dashboard"),
     path("edit-vendor-page/", views.edit_vendor_page, name="edit_vendor_page"),
     path(

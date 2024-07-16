@@ -18,9 +18,9 @@
   <div class="container">
     <div class="row">
       <div class="col-md-8 responsive-wrap">
-        <!-- Vendor Promotion / Brief / Description -->
+        <!-- Vendor Promotion / Description -->
         <div class="register-wrap">
-          <h5>Promotion / Brief / Description</h5>
+          <h5>Promotion / Description</h5>
           <hr />
           <div class="register">
             <p>{{ vendor.description |default:"Coming soon!" }}</p>
@@ -31,16 +31,20 @@
           <hr />
           <div class="register">
             {% if vendor.product_picture %}
-            <img src="{{ vendor.product_picture.url }}" class="image-preview" alt="product picture" />
+            <img
+              src="{{ vendor.product_picture.url }}"
+              class="image-preview"
+              alt="product picture"
+            />
             {% else %}
             <p>Product images coming soon!</p>
             {% endif %}
 
             <p>
-              Product Type: {{vendor.product_type | default:"Coming Soom!"}}
+              Product Type: {{vendor.product_type | default:"Coming Soon!"}}
             </p>
             <p>
-              Product Name: {{vendor.product_name | default:"Coming Soom!"}}
+              Product Name: {{vendor.product_name | default:"Coming Soon!"}}
             </p>
 
             {% if vendor.menu %}

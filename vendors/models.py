@@ -22,7 +22,10 @@ class Vendor(models.Model):
         default=None,
     )
     product_picture = models.ImageField(
-        upload_to="product_pictures/", blank=True, null=True, default=None
+        upload_to="product_pictures/",
+        blank=True,
+        null=True,
+        default="product_pictures/default.png",
     )
     menu = models.FileField(upload_to="menus/", blank=True, null=True, default=None)
 
@@ -32,6 +35,9 @@ class Vendor(models.Model):
 
     description = models.TextField(blank=True, null=True, default=None)
     # rating = models.DecimalField(max_digits = 1, decimal_places = 1, default=0)
+
+    def __str__(self):
+        return f"{self.name}"
 
 
 class Rating(models.Model):
@@ -51,6 +57,9 @@ class Blog(models.Model):
 
 class Market(models.Model):
     date = models.DateField()
+
+    def __str__(self):
+        return f"{self.date}"
 
 
 class MarketApplicant(models.Model):
