@@ -36,6 +36,7 @@ class Vendor(models.Model):
 
     description = models.TextField(blank=True, null=True, default=None)
     # rating = models.DecimalField(max_digits = 1, decimal_places = 1, default=0)
+    verified = models.BooleanField(default=False)
 
     def __str__(self):
         return f"{self.name}"

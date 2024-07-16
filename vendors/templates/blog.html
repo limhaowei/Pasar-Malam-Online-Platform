@@ -5,12 +5,13 @@
       <div class="col-md-10 responsive-wrap">
         <div class="register-wrap">
           <h5>
-            {{title}} - {{ selected_vendor.name | default:"Selected Vendor" }}
+            {% if blog %} {{blog.title}} - {{ blog.vendor.name }} {% else %}
+            Coming Soon... {% endif %}
           </h5>
         </div>
         <div class="register-wrap mt-4">
           <div class="register">
-            <p>{{ content }}</p>
+            <p>{{ blog.content | default:"Coming Soon..." }}</p>
           </div>
         </div>
       </div>

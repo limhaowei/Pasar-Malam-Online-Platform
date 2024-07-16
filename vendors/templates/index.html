@@ -32,11 +32,11 @@
       <div class="col-md-10">
         <div class="vendor-wrap d-flex">
           <div class="vendor-image col-md-5">
-            {% if selected_vendor.product_picture %}
+            {% if blog.vendor.product_picture %}
             <img
               alt="Product Picture"
               class="img-fluid"
-              src="{{ selected_vendor.product_picture.url }}"
+              src="{{ blog.vendor.product_picture.url }}"
             />
             {% else %}
             <img
@@ -47,16 +47,16 @@
             {% endif %}
           </div>
           <div class="vendor-info col-md-6">
-            {% if selected_vendor %}
-            <a href="{% url 'vendor_detail' selected_vendor.pk%}"
-              ><h6>{{selected_vendor.name}}</h6></a
+            {% if blog %}
+            <a href="{% url 'vendor_detail' blog.vendor.pk %}"
+              ><h6>{{ blog.vendor.name }}</h6></a
             >
             {% else %}
             <a href=""><h6>Coming Soon...</h6></a>
             {% endif %}
             <hr />
-            <p>{{blog_title}}</p>
-            <p>{{blog_content | slice:"100"}}</p>
+            <p>{{blog.title | default:"Coming Soon..." }}</p>
+            <p>{{blog.content | slice:"100" | default:"Coming Soon..." }}</p>
             <a href="{% url 'blog' %}">Read More</a>
           </div>
         </div>

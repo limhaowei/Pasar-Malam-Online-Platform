@@ -1,0 +1,64 @@
+{% extends 'main.html' %} {% load static %} {% block content %}
+<section class="light-bg company-details_wrap">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-10 responsive-wrap">
+        <div class="register-wrap">
+          <div class="register">
+            <h5>Manage Vendors</h5>
+          </div>
+        </div>
+        <div class="register-wrap mt-4">
+          <div class="register form">
+            <table>
+              <tr>
+                <th>Name</th>
+                <th>SSM Number</th>
+                <th>Certificate</th>
+                <th>Profile</th>
+                <th>Average Rating</th>
+                <!-- Add more columns as needed -->
+              </tr>
+              {% for vendor in vendors %}
+              <tr>
+                <td>{{ vendor.name }}</td>
+                <td>{{ vendor.ssm_no }}</td>
+                <td>
+                  <a href="{{ vendor.certificate.url }}" target="_blank"
+                    >View</a
+                  >
+                </td>
+                <td>
+                  <a href="{% url 'vendor_detail' vendor.pk %}">View</a>
+                </td>
+                <td>{{ vendor.average_rating }}</td>
+                <td>
+                  <a href="{% url 'delete_vendor' vendor.pk %}">Delete</a>
+                </td>
+
+                <td>{% if vendor.verified %} Verified</td>
+                <td>
+                  <a href="{% url 'weekly_vendor' vendor.pk %}"
+                    >Select as Vendor of the Week</a
+                  >
+                </td>
+                {% else %}
+                <td>
+                  <a href="{% url 'verify_vendor' vendor.pk %}">Verify</a>
+                </td>
+                <!-- Add more columns as needed -->
+              </tr>
+              {% endif %} {% empty %}
+              <tr>
+                <td colspan="4">No vendors yet.</td>
+              </tr>
+              {% endfor %}
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

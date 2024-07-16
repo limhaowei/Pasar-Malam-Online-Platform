@@ -5,30 +5,22 @@
       <div class="col-md-10 responsive-wrap">
         <div class="register-wrap">
           <div class="register">
-            <h5>Upload Payment Proof</h5>
+            <h5>Allocate Booth</h5>
           </div>
         </div>
         <div class="register-wrap mt-4">
-          <div class="register form">
+          <div class="register form-section">
             <form method="POST">
               {% csrf_token %}
-              <div class="form-section">
-                <label for="formInput">Upload Payment Proof</label
-                ><input
-                  type="file"
-                  id="proof_of_payment"
-                  name="proof_of_payment"
-                  upload="proof_of_payment"
-                  required
-                />
-              </div>
-              <br />
-
+              <p>Vendor: {{ market_applicant.vendor.name }}</p>
+              <p>Market Date: {{ market_applicant.market.date }}</p>
+              <p>Slot: {{ market_applicant.slot }}</p>
+              <label>Booth: </label>
+              <input type="text" name="booth_no" id="booth_no" required />
               <div class="button-section">
                 <br />
-                <button class="btn btn-danger" type="submit">Submit</button>
+                <button class="btn btn-danger" type="submit">Allocate</button>
               </div>
-              <br />
             </form>
           </div>
         </div>
@@ -36,4 +28,5 @@
     </div>
   </div>
 </section>
+
 {% endblock %}

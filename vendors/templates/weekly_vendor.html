@@ -5,30 +5,22 @@
       <div class="col-md-10 responsive-wrap">
         <div class="register-wrap">
           <div class="register">
-            <h5>Upload Payment Proof</h5>
+            <h5>Vendor of the Week</h5>
           </div>
         </div>
         <div class="register-wrap mt-4">
-          <div class="register form">
+          <div class="register form-section">
             <form method="POST">
-              {% csrf_token %}
+              {% csrf_token %} {% for field in form %}
               <div class="form-section">
-                <label for="formInput">Upload Payment Proof</label
-                ><input
-                  type="file"
-                  id="proof_of_payment"
-                  name="proof_of_payment"
-                  upload="proof_of_payment"
-                  required
-                />
+                <label for="formInput">{{field.label}}</label>
+                {{field}}
               </div>
-              <br />
-
+              {% endfor %}
               <div class="button-section">
                 <br />
-                <button class="btn btn-danger" type="submit">Submit</button>
+                <button class="btn btn-danger" type="submit">Save</button>
               </div>
-              <br />
             </form>
           </div>
         </div>
@@ -36,4 +28,5 @@
     </div>
   </div>
 </section>
+
 {% endblock %}

@@ -6,11 +6,7 @@ from django.core.mail import send_mail
 from django.core.paginator import Paginator
 
 from .models import Vendor, Market, MarketApplicant, Notification, Rating, Blog
-from .forms import (
-    CustomUserCreationForm,
-    MarketApplicantForm,
-    VendorPageForm,
-)
+from .forms import CustomUserCreationForm, MarketApplicantForm, VendorPageForm, BlogForm
 from .signals import send_notification_on_approval
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.models import User
@@ -19,18 +15,6 @@ from django.contrib.auth.models import User
 def logout_vendor(request):
     logout(request)
     return redirect("homepage")
-
-
-# # register-vendor.html / register_vendor.html template
-# def register_vendor(request):
-#     if request.method == "POST":
-#         form = VendorForm(request.POST, request.FILES)
-#         if form.is_valid():
-#             form.save()
-#             return redirect("homepage")
-#     else:
-#         form = VendorForm()
-#     return render(request, "register_vendor.html", {"form": form})
 
 
 # login.html
@@ -61,6 +45,7 @@ def login_vendor(request):
     return render(request, "login.html")
 
 
+# register.html
 def register_user(request):
     form = CustomUserCreationForm()
 
@@ -85,13 +70,11 @@ def register_user(request):
 
 # index.html
 def homepage(request):
-    selected_vendor = Vendor.objects.all().first()
-    vendors = Vendor.objects.all()[:6]
+    blog = Blog.objects.last()
+    vendors = Vendor.objects.filter(verified=True)[:6]
     context = {
         "vendors": vendors,
-        "selected_vendor": selected_vendor,
-        "blog_title": "Vendor of the Week",
-        "blog_content": "This is the content of the blog",
+        "blog": blog,
     }
     return render(request, "index.html", context)
 
@@ -99,7 +82,7 @@ def homepage(request):
 # vendors.html / vendor_list.html template (included infinite scroll)
 def vendors_page(request):
     page_number = request.GET.get("page", 1)
-    paginator = Paginator(Vendor.objects.all(), 6)
+    paginator = Paginator(Vendor.objects.filter(verified=True), 6)
     page_obj = paginator.get_page(page_number)
     context = {"page_obj": page_obj}
 
@@ -123,6 +106,24 @@ def search(request):
     return render(request, "vendor_list.html", context)
 
 
+# rate vendor function for vendor_list.html template
+def rate_vendor(request, pk):
+    vendor = get_object_or_404(Vendor, pk=pk)
+
+    if request.method == "POST":
+        rate = (
+            int(request.POST.get("rate1", 0))
+            + int(request.POST.get("rate2", 0))
+            + int(request.POST.get("rate3", 0))
+            + int(request.POST.get("rate4", 0))
+            + int(request.POST.get("rate5", 0))
+        )
+        comment = request.POST.get("comment", "")
+        rating = Rating.objects.create(vendor=vendor, rating=rate, comment=comment)
+
+    return redirect("homepage")
+
+
 # detail.html
 def vendor_detail(request, pk):
     vendor = get_object_or_404(Vendor, pk=pk)
@@ -134,27 +135,17 @@ def user_guide(request):
     return render(request, "user_guide.html")
 
 
-# # apply_slot.html
-# def apply_slot(request):
-#     context = {
-#         "month": "July",
-#         "year": "2024",
-#     }
-#     return render(request, "apply_slot.html", context)
-
-
 # vendor of the week
 def blog(request):
-    selected_vendor = Vendor.objects.all().first()
+    blog = Blog.objects.last()
     context = {
-        "selected_vendor": selected_vendor,
-        "title": "Vendor of the Week",
-        "content": "This is the content of the blog",
+        "blog": blog,
     }
     return render(request, "blog.html", context)
 
 
-# admin actions
+# Vendor-Specific Operations
+# apply slot for market
 @login_required(login_url="login")
 def apply_market_view(request, market_id):
     market = get_object_or_404(Market, pk=market_id)
@@ -172,43 +163,7 @@ def apply_market_view(request, market_id):
     return render(request, "apply_market.html", {"form": form, "market": market})
 
 
-@login_required(login_url="login")
-@permission_required("is_superuser")
-def manage(request):
-    if request.method == "POST":
-        date = request.POST.get("date")
-        if date:
-            market = Market.objects.create(date=date)
-            messages.success(request, "New market created successfully!")
-            return redirect("manage")
-    markets = Market.objects.all().order_by("date")
-    # markets = Market.objects.filter(date__gt=datetime.date.today()).order_by("date")
-    return render(request, "manage.html", {"markets": markets})
-
-
-@login_required(login_url="login")
-@permission_required("is_superuser")
-def market_applicants(request, market_id):
-    market = get_object_or_404(Market, pk=market_id)
-    applicants = MarketApplicant.objects.filter(market=market)
-    return render(
-        request, "market_applicants.html", {"market": market, "applicants": applicants}
-    )
-
-
-@login_required(login_url="login")
-@permission_required("is_superuser")
-def approve_application(request, pk):
-    market_applicant = MarketApplicant.objects.get(pk=pk)
-    market_applicant.approved = True
-    market_applicant.save()
-
-    # Send notification using signal
-    send_notification_on_approval(sender=None, market_applicant=market_applicant)
-
-    return redirect("market_applicants", market_id=market_applicant.market.id)
-
-
+# edit vendor page
 @login_required(login_url="login")
 def edit_vendor_page(request):
     vendor = request.user.vendor
@@ -222,6 +177,7 @@ def edit_vendor_page(request):
     return render(request, "edit_vendor_page.html", {"form": form})
 
 
+# dashboard for vendor
 @login_required(login_url="login")
 def vendor_dashboard(request):
     vendor = request.user.vendor
@@ -236,6 +192,7 @@ def vendor_dashboard(request):
     return render(request, "vendor_dashboard.html", context)
 
 
+# mark notification as read
 @login_required(login_url="login")
 def mark_notification_as_read(request):
     notification_id = request.POST.get("notification_id")
@@ -245,6 +202,7 @@ def mark_notification_as_read(request):
     return HttpResponse("Notification marked as read")
 
 
+# upload payment proof
 @login_required(login_url="login")
 def upload_payment_page(request, pk):
     vendor = request.user.vendor
@@ -253,23 +211,121 @@ def upload_payment_page(request, pk):
         market_applicant.proof_of_payment = request.POST["proof_of_payment"]
         market_applicant.save()
         return redirect("vendor_dashboard")
-    else:
-        form = VendorPageForm(instance=vendor)
+
     return render(request, "payment_proof.html")
 
 
-def rate_vendor(request, pk):
-    vendor = get_object_or_404(Vendor, pk=pk)
+# Admin-Specific Operations
+# view all applicants for a market
+@login_required(login_url="login")
+@permission_required("is_superuser")
+def market_applicants(request, market_id):
+    market = get_object_or_404(Market, pk=market_id)
+    applicants = MarketApplicant.objects.filter(market=market)
+    return render(
+        request, "market_applicants.html", {"market": market, "applicants": applicants}
+    )
+
+
+# approve application
+@login_required(login_url="login")
+@permission_required("is_superuser")
+def approve_application(request, pk):
+    market_applicant = MarketApplicant.objects.get(pk=pk)
+    market_applicant.approved = True
+    market_applicant.save()
+
+    # Send notification using signal
+    send_notification_on_approval(sender=None, market_applicant=market_applicant)
+
+    return redirect("market_applicants", market_id=market_applicant.market.id)
+
+
+# manage market includes creating new market
+@login_required(login_url="login")
+@permission_required("is_superuser")
+def manage(request):
+    # Auto clean up uncessary market and market applicants data (30 days from today)
+    print(datetime.date.today() - datetime.timedelta(days=30))
+    past_market = Market.objects.filter(
+        date__lt=datetime.date.today() - datetime.timedelta(days=30)
+    )
+    print(past_market)
+
+    if past_market:
+        market_applicants = MarketApplicant.objects.filter(market__in=past_market)
+        print(market_applicants)
+        market.delete()
 
     if request.method == "POST":
-        rate = (
-            int(request.POST.get("rate1", 0))
-            + int(request.POST.get("rate2", 0))
-            + int(request.POST.get("rate3", 0))
-            + int(request.POST.get("rate4", 0))
-            + int(request.POST.get("rate5", 0))
-        )
-        comment = request.POST.get("comment", "")
-        rating = Rating.objects.create(vendor=vendor, rating=rate, comment=comment)
+        date = request.POST.get("date")
+        if date:
+            market = Market.objects.create(date=date)
+            messages.success(request, "New market created successfully!")
+            return redirect("manage")
+    markets = Market.objects.all().order_by("date")
+    # markets = Market.objects.filter(date__gt=datetime.date.today()).order_by("date")
+    return render(request, "manage.html", {"markets": markets})
 
-    return redirect("homepage")
+
+# allocate booth number for approved market applicants
+@login_required(login_url="login")
+@permission_required("is_superuser")
+def allocate_booth(request, pk):
+    market_applicant = MarketApplicant.objects.get(pk=pk)
+    print(market_applicant)
+
+    if request.method == "POST":
+        allocate_booth = request.POST["booth_no"]
+        print(allocate_booth)
+        market_applicant.booth_no = allocate_booth
+        market_applicant.save()
+        return redirect("manage")
+    else:
+        return render(
+            request, "allocate_booth.html", {"market_applicant": market_applicant}
+        )
+
+
+# manage vendors
+@login_required(login_url="login")
+@permission_required("is_superuser")
+def manage_vendor(request):
+    vendors = Vendor.objects.all()
+    return render(request, "manage_vendors.html", {"vendors": vendors})
+
+
+# verify vendor
+@login_required(login_url="login")
+@permission_required("is_superuser")
+def verify_vendor(request, pk):
+    vendor = Vendor.objects.get(pk=pk)
+    vendor.verified = True
+    vendor.save()
+    return redirect("manage_vendor")
+
+
+# delete vendor
+@login_required(login_url="login")
+@permission_required("is_superuser")
+def delete_vendor(request, pk):
+    vendor = Vendor.objects.get(pk=pk)
+    vendor.delete()
+    return redirect("manage_vendor")
+
+
+# create blog for vendor of the week
+@login_required(login_url="login")
+@permission_required("is_superuser")
+def create_blog(request, pk):
+    vendor = Vendor.objects.get(pk=pk)
+    if request.method == "POST":
+        form = BlogForm(request.POST)
+        if form.is_valid():
+            blog = form.save(commit=False)
+            blog.vendor = vendor
+            blog.save()
+            return redirect("homepage")
+    else:
+        form = BlogForm()
+    return render(request, "weekly_vendor.html", {"form": form})

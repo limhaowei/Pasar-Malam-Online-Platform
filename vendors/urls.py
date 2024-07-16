@@ -39,4 +39,9 @@ urlpatterns = [
         name="upload_payment",
     ),
     path("rate_vendor/<int:pk>/", views.rate_vendor, name="rate_vendor"),
+    path("manage_vendor/", views.manage_vendor, name="manage_vendor"),
+    path("allocate_booth/<pk>/", views.allocate_booth, name="allocate_booth"),
+    path("verify_vendor/<pk>/", views.verify_vendor, name="verify_vendor"),
+    path("delete_vendor/<pk>/", views.delete_vendor, name="delete_vendor"),
+    path("weekly_vendor/<pk>/", views.create_blog, name="weekly_vendor"),
 ]

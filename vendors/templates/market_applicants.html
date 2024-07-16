@@ -41,14 +41,20 @@
                   >
                 </td>
                 <td>
+                  {% if applicant.proof_of_payment %}
                   <a href="{{ applicant.proof_of_payment.url }}" target="_blank"
                     >View</a
                   >
+                  {% else %} N/A {% endif %}
                 </td>
                 <td>{{ applicant.booth_no }}</td>
 
                 <td>{% if applicant.approved %} Approved</td>
-                <td><a>Allocate Booth</a></td>
+                <td>
+                  <a href="{% url 'allocate_booth' applicant.pk %}"
+                    >Allocate Booth</a
+                  >
+                </td>
                 {% else %}
                 <td>Pending</td>
                 <td>
