@@ -1348,3 +1348,53 @@ li {
 .image-preview {
   max-width: 80%;
 }
+
+/* table*/
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  font-size: 16px;
+  text-align: left;
+}
+
+.table th,
+.table td {
+  padding: 12px 15px;
+  border: 1px solid #ddd;
+}
+
+.table th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+}
+
+.table tr {
+  background-color: #ffffff;
+}
+
+.table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.table tr:hover {
+  background-color: #f1f1f1;
+}
+
+.table a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.table a:hover {
+  text-decoration: underline;
+}
+
+.table td a {
+  display: block;
+  text-align: center;
+}
+
+.table td {
+  vertical-align: middle;
+}
