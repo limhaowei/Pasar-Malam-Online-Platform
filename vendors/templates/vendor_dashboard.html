@@ -38,7 +38,10 @@
                 >
                 {% endif %}
               </li>
-              {% empty %}
+              {% if approved_market.booth_no %} Booth number assigned for
+              {{approved_market.market.date}} Market is
+              {{approved_market.booth_no}} {% else %} Booth number not assigned
+              for {{approved_market.market.date}} Market {% endif %} {% empty %}
               <p>No Payment required.</p>
               {% endfor %}
             </ul>
