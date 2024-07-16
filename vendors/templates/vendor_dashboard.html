@@ -27,11 +27,21 @@
               <li>No notifications</li>
               {% endfor %}
             </ul>
-            <p>
-              <a href="{% url 'edit_vendor_page' %}"
-                >Edit Your Vendor Profile</a
-              >
-            </p>
+            <hr />
+            <ul>
+              {% for approved_market in approved_markets %}
+              <li>
+                {% if approved_market.proof_of_payment %} Uploaded payment proof
+                for {{approved_market.market.date}} Market {% else %}
+                <a href="{% url 'upload_payment' approved_market.pk %}"
+                  >Upload Payment Proof for {{ approved_market.market.date }}</a
+                >
+                {% endif %}
+              </li>
+              {% empty %}
+              <p>No Payment required.</p>
+              {% endfor %}
+            </ul>
           </div>
         </div>
       </div>

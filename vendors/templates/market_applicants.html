@@ -17,7 +17,6 @@
                 <th>Certificate</th>
                 <th>Equipment List</th>
                 <th>Profile</th>
-                <th>Status</th>
                 <!-- Add more columns as needed -->
               </tr>
               {% for applicant in applicants %}
@@ -39,7 +38,11 @@
                     >View</a
                   >
                 </td>
-                <td>{% if applicant.approved %} Approved {% else %} Pending</td>
+                <td>{% if applicant.approved %} Approved</td>
+                <td><a>Send Payment Request</a></td>
+                <td><a>Allocate Booth</a></td>
+                {% else %}
+                <td>Pending</td>
                 <td>
                   <a href="{% url 'approve_application' applicant.pk %}"
                     >Approve</a

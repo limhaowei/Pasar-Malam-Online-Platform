@@ -214,7 +214,7 @@ def approve_application(request, pk):
 def edit_vendor_page(request):
     vendor = request.user.vendor
     if request.method == "POST":
-        form = VendorPageForm(request.POST, instance=vendor)
+        form = VendorPageForm(request.POST, request.FILES, instance=vendor)
         if form.is_valid():
             form.save()
             return redirect("vendor_dashboard")
@@ -227,7 +227,13 @@ def edit_vendor_page(request):
 def vendor_dashboard(request):
     vendor = request.user.vendor
     markets = Market.objects.filter(date__gt=datetime.date.today()).order_by("date")
-    context = {"vendor": vendor, "markets": markets}
+    approved_markets = MarketApplicant.objects.filter(vendor=vendor, approved=True)
+    print(approved_markets)
+    context = {
+        "vendor": vendor,
+        "markets": markets,
+        "approved_markets": approved_markets,
+    }
     return render(request, "vendor_dashboard.html", context)
 
 
@@ -238,3 +244,16 @@ def mark_notification_as_read(request):
     notification.read = True
     notification.save()
     return HttpResponse("Notification marked as read")
+
+
+@login_required(login_url="login")
+def upload_payment_page(request, pk):
+    vendor = request.user.vendor
+    if request.method == "POST":
+        market_applicant = MarketApplicant.objects.get(pk=pk)
+        market_applicant.proof_of_payment = request.POST["proof_of_payment"]
+        market_applicant.save()
+        return redirect("vendor_dashboard")
+    else:
+        form = VendorPageForm(instance=vendor)
+    return render(request, "payment_proof.html")

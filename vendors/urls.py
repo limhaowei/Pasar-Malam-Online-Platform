@@ -33,4 +33,9 @@ urlpatterns = [
         views.mark_notification_as_read,
         name="mark_notification_as_read",
     ),
+    path(
+        "upload_payment/<pk>/",
+        views.upload_payment_page,
+        name="upload_payment",
+    ),
 ]
