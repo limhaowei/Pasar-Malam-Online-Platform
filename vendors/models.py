@@ -83,7 +83,7 @@ class MarketApplicant(models.Model):
     vendor = models.ForeignKey("Vendor", on_delete=models.CASCADE)
     slot = models.CharField(max_length=20, choices=SLOT_TYPE_CHOICES)
     certificate = models.FileField(upload_to="certificates/")
-    equipment_list = models.FileField(upload_to="equipment_lists/")
+    equipment_list = models.CharField(max_length=255)
 
     approved = models.BooleanField(default=False)
     # if selected
