@@ -338,8 +338,10 @@ def create_blog(request, pk):
     return render(request, "weekly_vendor.html", {"form": form})
 
 
-# display reviews for each vendor
-
-
-
-
+# display reviews 
+def vendor_review(request, pk):
+    vendor = get_object_or_404(Vendor, pk=pk)
+    ratings = Rating.objects.filter(vendor=vendor)
+    return render(
+        request, "vendor_page.html", {"ratings": ratings}
+        )

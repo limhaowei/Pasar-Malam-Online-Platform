@@ -791,6 +791,22 @@ footer {
   line-height: 1.75;
 }
 
+.rating-block {
+  padding: 10px;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  margin-bottom: 10px;
+}
+
+.rating-block p {
+  margin: 0;
+}
+
+.rating-block small {
+  color: #666;
+}
+
 /* registration form */
 form {
   margin: auto;
