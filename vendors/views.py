@@ -133,7 +133,9 @@ def rate_vendor(request, pk):
 # detail.html
 def vendor_detail(request, pk):
     vendor = get_object_or_404(Vendor, pk=pk)
-    return render(request, "vendor_page.html", {"vendor": vendor})
+
+    ratings = Rating.objects.filter(vendor=vendor)
+    return render(request, "vendor_page.html", {"vendor": vendor,"ratings": ratings})
 
 
 # user_guide.html
@@ -338,10 +340,3 @@ def create_blog(request, pk):
     return render(request, "weekly_vendor.html", {"form": form})
 
 
-# display reviews 
-def vendor_review(request, pk):
-    vendor = get_object_or_404(Vendor, pk=pk)
-    ratings = Rating.objects.filter(vendor=vendor)
-    return render(
-        request, "vendor_page.html", {"ratings": ratings}
-        )
