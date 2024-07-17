@@ -336,3 +336,10 @@ def create_blog(request, pk):
     else:
         form = BlogForm()
     return render(request, "weekly_vendor.html", {"form": form})
+
+
+# display reviews for each vendor
+
+
+
+
