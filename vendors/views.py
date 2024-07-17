@@ -189,11 +189,12 @@ def vendor_dashboard(request):
     vendor = request.user.vendor
     markets = Market.objects.filter(date__gt=datetime.date.today()).order_by("date")
     approved_markets = MarketApplicant.objects.filter(vendor=vendor, approved=True)
-    print(approved_markets)
+    notifications = Notification.objects.filter(vendor=vendor, read=False)
     context = {
         "vendor": vendor,
         "markets": markets,
         "approved_markets": approved_markets,
+        "notifications": notifications,
     }
     return render(request, "vendor_dashboard.html", context)
 
@@ -281,11 +282,9 @@ def manage(request):
 @permission_required("is_superuser")
 def allocate_booth(request, pk):
     market_applicant = MarketApplicant.objects.get(pk=pk)
-    print(market_applicant)
 
     if request.method == "POST":
         allocate_booth = request.POST["booth_no"]
-        print(allocate_booth)
         market_applicant.booth_no = allocate_booth
         market_applicant.save()
         return redirect("manage")
