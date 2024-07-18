@@ -10,7 +10,7 @@
         </div>
         <div class="register-wrap mt-4">
           <div class="register form">
-            <table class = "table">
+            <table class="table">
               <tr>
                 <th>Vendor Name</th>
                 <th>Slot Type</th>
@@ -32,11 +32,7 @@
                     >View</a
                   >
                 </td>
-                <td>
-                  <a href="{{ applicant.equipment_list.url }}" target="_blank"
-                    >View</a
-                  >
-                </td>
+                <td>{{ applicant.equipment_list }}</td>
                 <td>
                   <a href="{% url 'vendor_detail' applicant.vendor.pk %}"
                     >View</a
