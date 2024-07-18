@@ -33,9 +33,7 @@
                   >
                 </td>
                 <td>
-                  <a href="{{ applicant.equipment_list.url }}" target="_blank"
-                    >View</a
-                  >
+                  {{ applicant.equipment_list }}
                 </td>
                 <td>
                   <a href="{% url 'vendor_detail' applicant.vendor.pk %}"
