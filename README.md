@@ -1,6 +1,10 @@
-# TeaMWork-86
+# Pasar Malam Online Platform
 
 ## An all in one platform to digitalise night markets (pasar malam).
+
+## Purpose
+Speeds up the process for vendors and night market hosts to set up a night market by having the registration, vendor management, slot allocation and payment done in one place.
+
 
 ## Features:
 - Account system for each vendor
