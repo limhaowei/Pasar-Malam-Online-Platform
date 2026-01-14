@@ -86,7 +86,7 @@ class MarketApplicant(models.Model):
     equipment_list = models.CharField(max_length=255)
 
     approved = models.BooleanField(default=False)
-    # if selected
+    
     proof_of_payment = models.FileField(
         upload_to="proof_of_payments/", blank=True, null=True, default=None
     )
